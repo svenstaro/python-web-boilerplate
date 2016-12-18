@@ -1,0 +1,25 @@
+Flask~=0.11.1
+Flask-SQLAlchemy==2.1
+marshmallow~=2.10.4
+SQLAlchemy~=1.1.4
+webargs~=1.5.0
+pytest
+pytest-cov
+pytest-greendots
+pytest-flask
+alembic~=0.8.9
+requests~=2.12.4
+pwgen~=0.7
+psycopg2
+flake8  # lint Python
+
+#bouncer==0.1.12
+#https://github.com/Nukesor/flask-bouncer/archive/stable-0.1.tar.gz  # We use this fork because flask-bouncer is unmaintained
+#Flask-Migrate~=1.8.0
+#Flask-Script~=2.0.5
+#hypothesis  # Property based testing
+#raven[flask]>=5.27.1  # Minimum version due to https://github.com/getsentry/raven-python/issues/863
+#newrelic
+#apispec~=0.15.0
+#freezegun~=0.3.6
+#retry
