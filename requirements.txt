@@ -9,7 +9,9 @@ alembic~=0.8.9
 requests~=2.12.4
 pwgen~=0.7
 SQLAlchemy~=1.1.4
+sqlalchemy-utils~=0.32.12
 psycopg2
+itsdangerous~=0.24
 
 # Linting
 flake8
