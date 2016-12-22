@@ -40,7 +40,7 @@ def register_cli(app):
         db_url = db.engine.url
         if database_exists(db_url):
             drop_database(db_url)
-            create_database(db_url)
+        create_database(db_url)
 
         db.create_all()
 
