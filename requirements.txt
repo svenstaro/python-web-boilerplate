@@ -15,6 +15,11 @@ itsdangerous~=0.24
 
 # Linting
 flake8
+flake8-docstrings
+flake8-print
+flake8-commas
+flake8-bugbear
+flake8-string-format
 mypy-lang
 
 # Testing

@@ -1,5 +1,4 @@
 from flask import g
-from webargs.flaskparser import use_args
 
 from boilerplateapp.api import api
 from boilerplateapp.schemas.user import UserSchema
