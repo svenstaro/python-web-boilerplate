@@ -1,0 +1,18 @@
+# Linting
+flake8
+flake8-docstrings
+flake8-print
+flake8-commas
+flake8-bugbear
+flake8-string-format
+
+# Testing
+pytest
+pytest-cov
+pytest-greendots
+pytest-flask
+hypothesis
+
+# Niceness
+ipython
+flask-shell-ipython

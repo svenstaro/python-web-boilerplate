@@ -13,31 +13,12 @@ sqlalchemy-utils~=0.32.12
 psycopg2
 itsdangerous~=0.24
 
-# Linting
-flake8
-flake8-docstrings
-flake8-print
-flake8-commas
-flake8-bugbear
-flake8-string-format
-
-# Testing
-pytest
-pytest-cov
-pytest-greendots
-pytest-flask
-hypothesis
-
-# Niceness
-ipython
-flask-shell-ipython
-
+#apispec~=0.15.0
 #bouncer==0.1.12
-#https://github.com/Nukesor/flask-bouncer/archive/stable-0.1.tar.gz  # We use this fork because flask-bouncer is unmaintained
 #Flask-Migrate~=1.8.0
 #Flask-Script~=2.0.5
-#raven[flask]>=5.27.1  # Minimum version due to https://github.com/getsentry/raven-python/issues/863
-#newrelic
-#apispec~=0.15.0
 #freezegun~=0.3.6
+#https://github.com/Nukesor/flask-bouncer/archive/stable-0.1.tar.gz  # We use this fork because flask-bouncer is unmaintained
+#newrelic
+#raven[flask]>=5.27.1  # Minimum version due to https://github.com/getsentry/raven-python/issues/863
 #retry
