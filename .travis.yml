@@ -1,10 +1,16 @@
 sudo: required
 language: python
+install: "pip install -r requirements.txt"
+
 python:
   - "3.5"
   - "3.6"
   - "pypy3"
-install: "pip install -r requirements.txt"
+
+matrix:
+  allow_failures:
+    - python: pypy3
+
 script:
   - flake8
   - pytest
