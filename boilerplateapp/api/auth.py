@@ -1,3 +1,4 @@
+"""User auth things such as login and registering."""
 from webargs.flaskparser import use_args
 
 from boilerplateapp.api import api
@@ -12,6 +13,10 @@ from boilerplateapp.responses import ok, conflict, created, unauthorized
 @login_exempt
 @use_args(UserSchema())
 def login(args):
+    """Log the user in and return a response with an auth token.
+
+    Return UNAUTHORIZED in case the user can't be found or if the password is incorrect.
+    """
     user = db.session.query(User).filter_by(email=args['email']).first()
 
     # For privacy reasons, we'll not provide the exact reason for failure here.
@@ -29,6 +34,10 @@ def login(args):
 @login_exempt
 @use_args(UserSchema())
 def register(args):
+    """Register a new user using email and password.
+
+    Return CONFLICT is a user with the same email already exists.
+    """
     if db.session.query(User).filter_by(email=args['email']).first():
         return conflict("User already exists.")
 

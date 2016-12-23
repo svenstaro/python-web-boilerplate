@@ -1,7 +1,16 @@
+"""This package contains the whole boilerplateapp with all of its models, views and other modules.
+
+This particular file additionally contains the applications factory.
+"""
+
 from flask import Flask
 
 
 def create_app(config_name):
+    """Flask app factory function.
+
+    It takes a `config_name` of the specific configuration to use for this instantiation.
+    """
     app = Flask(__name__, static_folder=None)
 
     from boilerplateapp.config import configs

@@ -1,3 +1,4 @@
+"""Primary conftest.py file for pytest."""
 import pytest
 from sqlalchemy.exc import InternalError
 from sqlalchemy_utils.functions import database_exists, create_database, drop_database
@@ -9,20 +10,18 @@ from boilerplateapp.models.user import User
 
 @pytest.fixture(scope='session')
 def app(request):
-    """Application with testing config"""
-
+    """Application with testing config."""
     app = create_app('testing')
     return app
 
 
 @pytest.fixture(scope='session')
 def dbmodels(app):
-    """Database and models
+    """Database and models.
 
     If the database defined in `SQLALCHEMY_DATABASE_URI` already exists, it is
     dropped and re-created.
     """
-
     with app.app_context():
         # If there is an existing database, make sure to drop it and re-create
         # it in order to make sure that we're getting a clean testrun.
@@ -81,7 +80,7 @@ def dbtransaction(app, request, request_ctx, monkeypatch):
 
 @pytest.fixture()
 def user():
-    """Return a `User`"""
+    """Return a `User`."""
     new_user = User("test@example.com", "test")
     db.session.add(new_user)
     db.session.commit()

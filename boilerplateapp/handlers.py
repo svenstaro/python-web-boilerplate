@@ -1,3 +1,4 @@
+"""Module containing all handlers for the API."""
 from flask import g, request
 
 from boilerplateapp.models.user import User
@@ -13,6 +14,7 @@ from boilerplateapp.responses import (
 
 
 def register_handlers(app):
+    """Helper function for which is called from the application factory."""
     @app.before_request
     def default_login_required():
         # If this is an error or something else without a proper endpoint, just

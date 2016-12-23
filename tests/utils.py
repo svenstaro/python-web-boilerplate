@@ -1,5 +1,8 @@
+"""Various testing utilities."""
+
+
 def make_headers(user, method):
-    """Return proper headers for the given `method` and `user`
+    """Return proper headers for the given `method` and `user`.
 
     Args:
         user - The `User` to generate the token for.
@@ -11,7 +14,7 @@ def make_headers(user, method):
     token = user.generate_auth_token(salt='login')
     headers = {
         'Accept': 'application/json',
-        'Authorization': 'Bearer {}'.format(token.decode('ASCII'))
+        'Authorization': 'Bearer {token}'.format(token=token.decode('ASCII')),
     }
 
     if method in ['POST', 'PUT']:

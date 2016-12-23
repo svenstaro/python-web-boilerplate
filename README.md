@@ -4,11 +4,11 @@
 
 Install all dependencies into a virtualenv which will be created at `venv/`:
 
-  make
+    make
 
 Set up your environment by sourcing `dev_env.sh`.
 
-  source dev_env.sh
+    source dev_env.sh
 
 For every new shell you need to source this file and you're good to go.
 
@@ -17,10 +17,10 @@ admin in your development postgres installation and it should use the "peer" or
 "trust" auth methods (see `pg_hba.conf`). Given that, create a local
 development database with some test data:
 
-  flask initdb
+    flask initdb
 
 Afterwards, type
 
-  flask run
+    flask run
 
 to run the development server.

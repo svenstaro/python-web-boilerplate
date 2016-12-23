@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+"""API Helper to ease making API calls to this Python API.
+
+It does things such as fetching a token for every request with username and
+password.
+"""
 
 import argparse
 import json
@@ -10,7 +15,8 @@ DEFAULT_USERNAME = 'test@example.com'
 DEFAULT_PASSWORD = 'test'
 
 
-def parse_args():
+def _parse_args():
+    """Parse command line arguments."""
     parser = argparse.ArgumentParser(description='API convenience helper')
     parser.add_argument('-u', '--username', default=DEFAULT_USERNAME)
     parser.add_argument('-p', '--password', default=DEFAULT_PASSWORD)
@@ -24,21 +30,22 @@ def parse_args():
     return args
 
 
-def acquire_token(url, username, password):
+def _acquire_token(url, username, password):
+    """Login with `username` and `password` and return the resulting token."""
     token = None
     # First get a token
     data = {
         'email': username,
         'password': password,
     }
-    resp = requests.post("{}/login".format(host), json=data)
+    resp = requests.post("{host}/login".format(host=host), json=data)
 
     if resp.status_code != 200:
-        print("ERROR")
+        print("ERROR")  # noqa: T003
         try:
             pprint(resp.json())
         except ValueError:
-            print(resp)
+            print(resp)  # noqa: T003
         finally:
             exit(1)
 
@@ -46,11 +53,12 @@ def acquire_token(url, username, password):
     return token
 
 
-def do_request(url, token):
+def _do_request(args, token):
+    """Do the actual request to with the attributes set in `args` using `token`."""
     headers = {
         'Accept': 'application/json',
         'user-agent': 'API Helper 1.0',
-        'Authorization': 'Bearer {}'.format(token)
+        'Authorization': 'Bearer {token}'.format(token=token),
     }
 
     # Now use that token to make the actual API request
@@ -80,21 +88,21 @@ def do_request(url, token):
         resp = requests.delete(args.url, headers=headers)
         return resp
     else:
-        print("No valid method provided.")
+        print("No valid method provided.")  # noqa: T003
         exit(1)
 
 
 if __name__ == "__main__":
-    args = parse_args()
+    args = _parse_args()
 
     parsed_url = urlparse(args.url)
-    host = "{}://{}".format(parsed_url.scheme, parsed_url.netloc)
-    login_url = "{}/login".format(host, auth=(args.username, args.password))
-    token = acquire_token(login_url, args.username, args.password)
+    host = "{scheme}://{netloc}".format(scheme=parsed_url.scheme, netloc=parsed_url.netloc)
+    login_url = "{host}/login".format(host=host)
+    token = _acquire_token(login_url, args.username, args.password)
 
-    resp = do_request(args.url, token)
+    resp = _do_request(args, token)
 
     if args.parseable:
-        print(json.dumps(resp.json()))
+        print(json.dumps(resp.json()))  # noqa: T003
     else:
         pprint(resp.json())
