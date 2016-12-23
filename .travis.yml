@@ -1,7 +1,6 @@
 sudo: required
 language: python
 python:
-  - "3.4"
   - "3.5"
   - "3.6"
   - "pypy3"
@@ -15,9 +14,10 @@ services:
   - postgresql
 
 env:
-  - FLASK_APP="app.py"
-  - BOILERPLATEAPP_CONFIG="testing"
-  - SQLALCHEMY_DATABASE_URI="postgresql://postgres@localhost/boilerplateapp"
+  global:
+    - FLASK_APP="app.py"
+    - BOILERPLATEAPP_CONFIG="testing"
+    - SQLALCHEMY_DATABASE_URI="postgresql://postgres@localhost/boilerplateapp"
 
 addons:
   - postgresql="9.4"
