@@ -1,0 +1,24 @@
+sudo: required
+python:
+  - "3.4"
+  - "3.5"
+  - "3.6"
+  - "pypy3"
+install: "pip install -r requirements.txt"
+script:
+  - flake8
+  - pytest
+
+services:
+  - docker
+  - postgresql
+
+env:
+  - FLASK_APP="app.py"
+  - BOILERPLATEAPP_CONFIG="testing"
+  - SQLALCHEMY_DATABASE_URI="postgresql://postgres@localhost/boilerplateapp"
+
+addons:
+  - postgresql="9.4"
+  - postgresql="9.5"
+  - postgresql="9.6"
