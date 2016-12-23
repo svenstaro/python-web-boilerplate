@@ -1,5 +1,7 @@
 # Python Web Template
 
+[![Build Status](https://travis-ci.org/svenstaro/python-web-boilerplate.svg?branch=master)](https://travis-ci.org/svenstaro/python-web-boilerplate)
+
 ## Development setup
 
 Install all dependencies into a virtualenv which will be created at `venv/`:
