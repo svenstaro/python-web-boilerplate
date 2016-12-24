@@ -8,6 +8,11 @@ venv:
 test: venv
 	source ./dev_env.sh && venv/bin/pytest
 
+docker_test:
+	docker-compose rm -f
+	docker-compose pull
+	docker-compose up --build --force-recreate
+
 lint: venv
 	source ./dev_env.sh && venv/bin/flake8
 

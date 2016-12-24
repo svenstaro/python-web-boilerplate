@@ -1,0 +1,18 @@
+---
+version: '2'
+services:
+  postgresql:
+    image: postgres:9.6
+    environment:
+      POSTGRES_USER: pguser
+      POSTGRES_PASSWORD: pgpw
+    # logging:
+    #   driver: "none"
+  app:
+    build: .
+    links:
+      - "postgresql"
+    ports:
+      - "5000:5000"
+    environment:
+      SQLALCHEMY_DATABASE_URI: 'postgresql://pguser:pgpw@postgresql:5432/postgres'
