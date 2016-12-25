@@ -1,5 +1,6 @@
 """Primary conftest.py file for pytest."""
 import pytest
+from retry import retry
 from sqlalchemy.exc import InternalError
 from sqlalchemy_utils.functions import database_exists, create_database, drop_database
 
@@ -16,6 +17,7 @@ def app(request):
 
 
 @pytest.fixture(scope='session')
+@retry(tries=5, delay=5)
 def dbmodels(app):
     """Database and models.
 

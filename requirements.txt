@@ -12,6 +12,7 @@ SQLAlchemy~=1.1.4
 sqlalchemy-utils~=0.32.12
 psycopg2
 itsdangerous~=0.24
+retry~=0.9.2
 
 #apispec~=0.15.0
 #bouncer==0.1.12

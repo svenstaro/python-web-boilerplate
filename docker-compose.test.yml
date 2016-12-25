@@ -13,6 +13,8 @@ services:
     entrypoint:
       - make
       - _inside_docker_test_commands
+    depends_on:
+      - postgresql
     links:
       - "postgresql"
     ports:

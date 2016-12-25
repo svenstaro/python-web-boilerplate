@@ -13,8 +13,7 @@ docker_test:
 	# application inside a production-like environment.
 	docker-compose pull
 	docker-compose -f docker-compose.test.yml up --build --abort-on-container-exit --force-recreate --remove-orphans
-	# docker-compose rm -f
-	# docker-compose -f docker-compose.test.yml down --rmi local
+	docker-compose -f docker-compose.test.yml down --rmi local -v
 	# in docker 1.13 use: docker system prune -a
 
 _inside_docker_test_commands:
