@@ -26,6 +26,4 @@ env:
     - SQLALCHEMY_DATABASE_URI="postgresql://postgres@localhost/boilerplateapp"
 
 addons:
-  - postgresql="9.4"
-  - postgresql="9.5"
   - postgresql="9.6"
