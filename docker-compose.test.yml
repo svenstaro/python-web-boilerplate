@@ -6,12 +6,13 @@ services:
     environment:
       POSTGRES_USER: pguser
       POSTGRES_PASSWORD: pgpw
-    # logging:
-    #   driver: "none"
+    logging:
+      driver: "none"
   app:
     build: .
     entrypoint:
-      - flake8 && pytest
+      - make
+      - _inside_docker_test_commands
     links:
       - "postgresql"
     ports:
