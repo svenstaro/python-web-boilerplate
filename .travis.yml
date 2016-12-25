@@ -1,6 +1,6 @@
 sudo: required
 language: python
-install: "pip install -r requirements.txt"
+install: "pip install -r requirements.txt -r dev-requirements.txt"
 
 python:
   - "3.5"
