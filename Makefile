@@ -8,6 +8,9 @@ venv:
 test: venv
 	source ./dev_env.sh && venv/bin/pytest
 
+lint: venv
+	source ./dev_env.sh && venv/bin/flake8
+
 docker_test:
 	# Used to automatically run docker-compose to lint and test this
 	# application inside a production-like environment.
@@ -22,9 +25,6 @@ _inside_docker_test_commands:
 	# run outside of the container context.
 	flake8
 	pytest
-
-lint: venv
-	source ./dev_env.sh && venv/bin/flake8
 
 clean:
 	rm -rf venv
