@@ -1,3 +1,4 @@
+"""Tests for handlers."""
 import pytest
 from requests import codes
 
@@ -7,7 +8,7 @@ class TestBeforeHandlers:
     """Tests for before_request handlers."""
 
     def test_send_data_without_json_content_type(self, client):
-        """'POST' and 'PUT' methods always require the 'Content-Type' to be 'application/json'"""
+        """'POST' and 'PUT' methods always require the 'Content-Type' to be 'application/json'."""
         resp = client.post('/login')
         assert resp.status_code == codes.BAD_REQUEST
 

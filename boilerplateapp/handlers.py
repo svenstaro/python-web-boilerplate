@@ -17,12 +17,11 @@ def register_handlers(app):
     """Helper function for which is called from the application factory."""
     @app.before_request
     def require_json_input():
-        """Always require JSON input.
+        """Require JSON input.
 
         If the request's method is either 'POST' or 'PUT', require the
         'Content-Type' to be JSON.
         """
-
         if request.method in ['POST', 'PUT']:
             if request.headers['Content-Type'] != 'application/json':
                 return bad_request(data="'Content-Type' must be 'application/json'.")
