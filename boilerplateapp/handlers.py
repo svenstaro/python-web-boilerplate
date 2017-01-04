@@ -16,6 +16,18 @@ from boilerplateapp.responses import (
 def register_handlers(app):
     """Helper function for which is called from the application factory."""
     @app.before_request
+    def require_json_input():
+        """Always require JSON input.
+
+        If the request's method is either 'POST' or 'PUT', require the
+        'Content-Type' to be JSON.
+        """
+
+        if request.method in ['POST', 'PUT']:
+            if request.headers['Content-Type'] != 'application/json':
+                return bad_request(data="'Content-Type' must be 'application/json'.")
+
+    @app.before_request
     def default_login_required():
         # If this is an error or something else without a proper endpoint, just
         # return straight away.
@@ -38,6 +50,14 @@ def register_handlers(app):
             return unauthorized("Invalid user.")
 
         g.current_user = user
+
+    @app.after_request
+    def add_cors_headers(response):
+        """Add CORS to the headers of this request."""
+        response.headers['Access-Control-Allow-Origin'] = app.config['CORS_ALLOW_ORIGIN']
+        response.headers['Access-Control-Allow-Methods'] = app.config['CORS_ALLOW_METHODS']
+        response.headers['Access-Control-Allow-Headers'] = app.config['CORS_ALLOW_HEADERS']
+        return response
 
     @app.errorhandler(400)
     def handle_bad_request(e):

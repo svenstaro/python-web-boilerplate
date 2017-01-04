@@ -9,7 +9,7 @@ class TestWhoami:
 
     def test_success(self, client, user):
         """Can access protected resources when logged in."""
-        resp = client.get("/whoami", headers=make_headers(user, "GET"))
+        resp = client.get("/whoami", headers=make_headers("GET", user))
         assert resp.status_code == codes.OK
 
     def test_cant_access_protected_routes_without_login(self, client):

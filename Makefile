@@ -1,7 +1,7 @@
 default: venv
 
 venv:
-	pyvenv venv
+	python3 -m venv venv
 	venv/bin/pip install --upgrade pip
 	venv/bin/pip install -r requirements.txt -r dev-requirements.txt --upgrade
 
