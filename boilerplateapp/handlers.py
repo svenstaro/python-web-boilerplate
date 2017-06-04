@@ -16,7 +16,7 @@ from boilerplateapp.responses import (
 
 
 def register_handlers(app):
-    """Helper function for which is called from the application factory."""
+    """Register app handlers."""
     @app.before_request
     def require_json_input():
         """Require JSON input.

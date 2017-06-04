@@ -10,6 +10,7 @@ def make_headers(method, user=None):
 
     Returns:
         dict - Headers to use with the given `method` and containing a token for the given `user`.
+
     """
     headers = {
         'Accept': 'application/json',

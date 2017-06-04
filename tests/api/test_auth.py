@@ -132,6 +132,7 @@ class TestRegister:
 @pytest.mark.usefixtures('dbmodels', 'dbtransaction')
 class TestLastAction:
     """Tests for User.last_action behavior and auth token timeouts."""
+
     def test_last_action_is_refreshed(self, app, client, user_factory):
         """With every authenticated API request, the last_action column is refreshed."""
         user = user_factory.get()

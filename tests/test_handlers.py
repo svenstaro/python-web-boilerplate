@@ -78,7 +78,7 @@ class TestBeforeHandlers:
             'Authorization': 'Bearer {login_token}'.format(login_token=login_token),
             'Content-Type': 'application/json',
         }
-        url = '/whoami'.format(doesntmatter=uuid.uuid4())
+        url = '/whoami'
 
         resp = client.get(url, headers=headers)
 
@@ -100,7 +100,7 @@ class TestBeforeHandlers:
             'Authorization': 'Bearer {login_token}'.format(login_token=login_token),
             'Content-Type': 'application/json',
         }
-        url = '/whoami'.format(doesntmatter=uuid.uuid4())
+        url = '/whoami'
 
         resp = client.get(url, headers=headers)
 
@@ -121,7 +121,7 @@ class TestBeforeHandlers:
             'Authorization': 'Bearer {login_token}'.format(login_token=login_token),
             'Content-Type': 'application/json',
         }
-        url = '/whoami'.format(doesntmatter=uuid.uuid4())
+        url = '/whoami'
 
         resp = client.get(url, headers=headers)
 

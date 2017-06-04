@@ -11,7 +11,7 @@ from boilerplateapp.responses import ok
 
 @api.route('/whoami', methods=['GET'])
 def whoami():
-    """Simple method that echoes back the current user."""
+    """Echo back the current user."""
     user_schema = UserSchema()
 
     return ok(data=user_schema.dump(g.current_user))

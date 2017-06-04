@@ -6,7 +6,6 @@ from sqlalchemy_utils.functions import database_exists, create_database, drop_da
 
 from boilerplateapp import create_app
 from boilerplateapp.extensions import db
-from boilerplateapp.models.user import User
 
 from tests.factories import UserFactory
 

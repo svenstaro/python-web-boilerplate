@@ -9,8 +9,8 @@ from boilerplateapp.extensions import db
 from boilerplateapp.models.user import User
 
 
-def register_cli(app):  #pragma: no cover
-    """Helper function which is called from the factory function where `app` is constructed."""
+def register_cli(app):  # pragma: no cover
+    """Register a few CLI functions."""
     @app.cli.command()
     def url_map():
         """Print the URL map."""
