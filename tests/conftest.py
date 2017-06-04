@@ -8,6 +8,8 @@ from boilerplateapp import create_app
 from boilerplateapp.extensions import db
 from boilerplateapp.models.user import User
 
+from tests.factories import UserFactory
+
 
 @pytest.fixture(scope='session')
 def app(request):
@@ -81,9 +83,9 @@ def dbtransaction(app, request, request_ctx, monkeypatch):
 
 
 @pytest.fixture()
-def user():
-    """Return a `User`."""
-    new_user = User("test@example.com", "test")
-    db.session.add(new_user)
-    db.session.commit()
-    return new_user
+def user_factory():
+    """Return a factory with a `get` method which will return new `User`.
+
+    The new `User` is added to the database.
+    """
+    return UserFactory

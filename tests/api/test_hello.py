@@ -7,8 +7,9 @@ from tests.utils import make_headers
 class TestWhoami:
     """Tests for `api.hello.whoami`."""
 
-    def test_success(self, client, user):
+    def test_success(self, client, user_factory):
         """Can access protected resources when logged in."""
+        user = user_factory.get()
         resp = client.get("/whoami", headers=make_headers("GET", user))
         assert resp.status_code == codes.OK
 

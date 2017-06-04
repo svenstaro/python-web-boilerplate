@@ -1,5 +1,6 @@
 """Global project configuration."""
 import os
+from datetime import timedelta
 
 
 class Config(object):
@@ -8,6 +9,7 @@ class Config(object):
     DEBUG = False
     TESTING = False
     SERVER_NAME = 'localhost:5000'
+    AUTH_TOKEN_TIMEOUT = timedelta(days=30)
     SECRET_KEY = """
         neigh6echeih4eiqueetei2ietha1raitooSahzai6ugh0jahzahm
         u2»{1³21igh1saWooshi3uxah4oongiuphiox7iephoonahkoiK9u

@@ -1,7 +1,11 @@
 """Module containing the `User` model."""
-from itsdangerous import JSONWebSignatureSerializer, BadSignature
-from flask import current_app
+import uuid
+from datetime import datetime
+
+from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy_utils.models import Timestamp
+
+from flask import current_app
 
 from boilerplateapp.extensions import db, passlib
 
@@ -9,9 +13,11 @@ from boilerplateapp.extensions import db, passlib
 class User(db.Model, Timestamp):
     """User model."""
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(UUID(as_uuid=True), primary_key=True, nullable=False, default=uuid.uuid4)
     email = db.Column(db.String(120), unique=True, nullable=False, index=True)
     password_hash = db.Column(db.String(120), nullable=False)
+    current_auth_token = db.Column(db.String(36), index=True)
+    last_action = db.Column(db.DateTime)
 
     def __init__(self, email, password):
         """Construct a `User`.
@@ -40,28 +46,28 @@ class User(db.Model, Timestamp):
         """
         return passlib.pwd_context.verify(candidate_password, self.password_hash)
 
-    def generate_auth_token(self, salt):
-        """Generate a token containing the `id` of the current user with a given `salt`.
+    def generate_auth_token(self):
+        """Generate an auth token and save it to the `current_auth_token` column."""
+        new_auth_token = uuid.uuid4()
+        self.current_auth_token = '{auth_token}'.format(auth_token=new_auth_token)
+        self.last_action = datetime.utcnow()
+        db.session.add(self)
+        db.session.commit()
+        return new_auth_token
 
-        It should be noted that the `salt` is a namespace rather than
-        cryptographic salt so it doesn't need to be secure.
-        """
-        serializer = JSONWebSignatureSerializer(current_app.config['SECRET_KEY'], salt)
-        return serializer.dumps({'id': self.id})
+    @property
+    def has_valid_auth_token(self):
+        """Return whether or not the user has a valid auth token."""
+        latest_valid_date = datetime.utcnow() - current_app.config['AUTH_TOKEN_TIMEOUT']
+        return self.last_action and self.last_action > latest_valid_date
 
     @staticmethod
-    def get_user_from_auth_token(token, salt):
-        """Get a `User` from a token with `salt`.
+    def get_user_from_login_token(token):
+        """Get a `User` from a login token.
 
-        It should be noted that the `salt` is a namespace rather than
-        cryptographic salt so it doesn't need to be secure.
-        The `salt` needs to be match the `salt` value this token was generated with.
+        A login token has this format:
+            <user uuid>:<auth token>
         """
-        serializer = JSONWebSignatureSerializer(current_app.config['SECRET_KEY'], salt)
-        try:
-            data = serializer.loads(token)
-        except BadSignature:
-            return False
-
-        user = db.session.query(User).get(data['id'])
+        user_id, auth_token = token.split(':')
+        user = db.session.query(User).filter_by(id=user_id, current_auth_token=auth_token).first()
         return user

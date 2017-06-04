@@ -49,7 +49,7 @@ def _acquire_token(url, username, password):
         finally:
             exit(1)
 
-    token = resp.json()['data']
+    token = resp.json()['token']
     return token
 
 

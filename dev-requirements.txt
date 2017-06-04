@@ -11,8 +11,12 @@ pytest
 pytest-cov
 pytest-greendots
 pytest-flask
+pytest-watch
 hypothesis
 
 # Niceness
 ipython
 flask-shell-ipython
+
+# Tests
+freezegun

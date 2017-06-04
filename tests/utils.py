@@ -16,8 +16,13 @@ def make_headers(method, user=None):
     }
 
     if user:
-        token = user.generate_auth_token(salt='login')
-        headers['Authorization'] = 'Bearer {token}'.format(token=token.decode('ASCII'))
+        user_id = user.id
+        auth_token = user.generate_auth_token()
+        login_token = '{user_id}:{auth_token}'.format(
+            user_id=user_id,
+            auth_token=auth_token,
+        )
+        headers['Authorization'] = 'Bearer {login_token}'.format(login_token=login_token)
 
     if method in ['POST', 'PUT']:
         headers['Content-Type'] = 'application/json',

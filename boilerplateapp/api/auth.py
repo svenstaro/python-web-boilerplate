@@ -25,9 +25,15 @@ def login(args):
     if not user.verify_password(args['password']):
         return unauthorized("Username or password incorrect.")
 
-    token = user.generate_auth_token(salt='login')
+    if user.has_valid_auth_token:
+        token = user.current_auth_token
+    else:
+        token = user.generate_auth_token()
+        user.current_auth_token = token
+        db.session.add(user)
+        db.session.commit()
 
-    return ok(data=token.decode('ASCII'))
+    return ok(data={"token": token})
 
 
 @api.route('/register', methods=['POST'])

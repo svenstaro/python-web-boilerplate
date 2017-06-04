@@ -1,6 +1,8 @@
 """Module containing all handlers for the API."""
 from flask import g, request
+from datetime import datetime
 
+from boilerplateapp.extensions import db
 from boilerplateapp.models.user import User
 from boilerplateapp.responses import (
     bad_request,
@@ -24,7 +26,7 @@ def register_handlers(app):
         """
         if request.method in ['POST', 'PUT']:
             if request.headers['Content-Type'] != 'application/json':
-                return bad_request(data="'Content-Type' must be 'application/json'.")
+                return bad_request("'Content-Type' must be 'application/json'.")
 
     @app.before_request
     def default_login_required():
@@ -39,15 +41,26 @@ def register_handlers(app):
             return
 
         token_header = request.headers.get('Authorization')
-        if not token_header or 'Bearer ' not in token_header:
-            return unauthorized("Token not found or in wrong format.")
+        if not token_header:
+            return unauthorized("'Authorization' not found in headers.")
+
+        if 'Bearer ' not in token_header:
+            return unauthorized("'Authorization' header has wrong format.")
 
         token = token_header.replace('Bearer ', '')
-        user = User.get_user_from_auth_token(token, salt='login')
+        user = User.get_user_from_login_token(token)
 
         if not user:
-            return unauthorized("Invalid user.")
+            return unauthorized("Invalid login token.")
 
+        # Require user to re-login if the last action is too long ago.
+        if not user.has_valid_auth_token:
+            return unauthorized("Auth token too old, please log in again.")
+
+        # At this point the user is considered successfully authenticated.
+        user.last_action = datetime.utcnow()
+        db.session.add(user)
+        db.session.commit()
         g.current_user = user
 
     @app.after_request
@@ -83,9 +96,9 @@ def register_handlers(app):
         return conflict(e.name)
 
     @app.errorhandler(422)
-    def handle_unprocessable_entity(err):
+    def handle_unprocessable_entity(e):
         # webargs attaches additional metadata to the `data` attribute
-        data = getattr(err, 'data')
+        data = getattr(e, 'data') if hasattr(e, 'data') else None
         if data:
             # Get validations from the ValidationError object
             messages = data['messages']
