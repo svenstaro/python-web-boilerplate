@@ -62,6 +62,29 @@ class TestBeforeHandlers:
         assert resp.status_code == codes.UNAUTHORIZED
         assert resp.json['message'] == "'Authorization' header has wrong format."
 
+    def test_login_fail_other_user(self, app, client, user_factory):
+        """Can't login with a login token that contains a valid auth token but another user id."""
+        user = user_factory.get()
+        other_user = user_factory.get()
+        user.generate_auth_token()
+
+        login_token = '{user_id}:{auth_token}'.format(
+            user_id=other_user.id,
+            auth_token=user.current_auth_token,
+        )
+
+        headers = {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer {login_token}'.format(login_token=login_token),
+            'Content-Type': 'application/json',
+        }
+        url = '/whoami'.format(doesntmatter=uuid.uuid4())
+
+        resp = client.get(url, headers=headers)
+
+        assert resp.status_code == codes.UNAUTHORIZED
+        assert resp.json['message'] == "Invalid login token."
+
     def test_login_fail_invalid_user(self, app, client, user_factory):
         """Can't login with a login token that contains an invalid user id."""
         user = user_factory.get()
