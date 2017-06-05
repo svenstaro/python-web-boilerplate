@@ -9,7 +9,7 @@ from boilerplateapp.helpers.decorators import login_exempt
 from boilerplateapp.responses import ok, conflict, created, unauthorized
 
 
-@api.route('/login', methods=['POST'])
+@api.route('/auth/login', methods=['POST'])
 @login_exempt
 @use_args(UserSchema())
 def login(args):
@@ -36,7 +36,7 @@ def login(args):
     return ok(data={"token": token})
 
 
-@api.route('/register', methods=['POST'])
+@api.route('/auth/register', methods=['POST'])
 @login_exempt
 @use_args(UserSchema())
 def register(args):

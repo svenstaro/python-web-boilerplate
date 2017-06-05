@@ -19,7 +19,7 @@ class TestLogin:
     def test_success(self, app, client, user_factory):
         """Can log in and get back a valid token."""
         user = user_factory.get()
-        resp = client.post("/login",
+        resp = client.post("/auth/login",
                            headers=make_headers('POST'),
                            data=json.dumps({"email": user.email,
                                             "password": "testtest"}))
@@ -29,12 +29,12 @@ class TestLogin:
     def test_same_auth_token(self, app, client, user_factory):
         """Can log in and get back the same auth token if there's already a valid one."""
         user = user_factory.get()
-        client.post("/login",
+        client.post("/auth/login",
                     headers=make_headers('POST'),
                     data=json.dumps({"email": user.email,
                                      "password": "testtest"}))
         current_token = user.current_auth_token
-        client.post("/login",
+        client.post("/auth/login",
                     headers=make_headers('POST'),
                     data=json.dumps({"email": user.email,
                                      "password": "testtest"}))
@@ -44,7 +44,7 @@ class TestLogin:
     def test_fail_wrong_username(self, app, client, user_factory):
         """Can't login with a wrong username and get an error."""
         user_factory.get()
-        resp = client.post("/login",
+        resp = client.post("/auth/login",
                            headers=make_headers('POST'),
                            data=json.dumps({"email": "invalid@example.com",
                                             "password": "testtest"}))
@@ -54,7 +54,7 @@ class TestLogin:
     def test_fail_wrong_password(self, app, client, user_factory):
         """Can't login with a wrong username and get an error."""
         user = user_factory.get()
-        resp = client.post("/login",
+        resp = client.post("/auth/login",
                            headers=make_headers('POST'),
                            data=json.dumps({"email": user.email, "password": "invalid"}))
         assert resp.status_code == codes.UNAUTHORIZED
@@ -69,7 +69,7 @@ class TestRegister:
         """Can register a new account with email and password and then log in with it."""
         new_email = "newuser@example.com"
         new_password = "test"
-        resp = client.post("/register",
+        resp = client.post("/auth/register",
                            headers=make_headers('POST'),
                            data=json.dumps({"email": new_email, "password": new_password}))
         assert resp.status_code == codes.CREATED
@@ -77,7 +77,7 @@ class TestRegister:
         assert resp.json == {"id": new_user_id, "email": new_email}
 
         # Now try to log in using the new account.
-        resp = client.post("/login",
+        resp = client.post("/auth/login",
                            headers=make_headers('POST'),
                            data=json.dumps({"email": new_email, "password": new_password}))
         assert resp.status_code == codes.OK
@@ -87,13 +87,13 @@ class TestRegister:
         """Can't register with an existing email."""
         new_email = "newuser@example.com"
         new_password = "test"
-        resp = client.post("/register",
+        resp = client.post("/auth/register",
                            headers=make_headers('POST'),
                            data=json.dumps({"email": new_email, "password": new_password}))
         assert resp.status_code == codes.CREATED
 
         # Now try to create a new account with the same email.
-        resp = client.post("/register",
+        resp = client.post("/auth/register",
                            headers=make_headers('POST'),
                            data=json.dumps({"email": new_email, "password": new_password}))
         assert resp.status_code == codes.CONFLICT
@@ -102,7 +102,7 @@ class TestRegister:
         """Can't register with an invalid email."""
         new_email = "invalid"
         new_password = "test"
-        resp = client.post("/register",
+        resp = client.post("/auth/register",
                            headers=make_headers('POST'),
                            data=json.dumps({"email": new_email, "password": new_password}))
         assert resp.status_code == codes.UNPROCESSABLE_ENTITY
@@ -112,7 +112,7 @@ class TestRegister:
         """Can't register with an empty email."""
         new_email = ""
         new_password = "test"
-        resp = client.post("/register",
+        resp = client.post("/auth/register",
                            headers=make_headers('POST'),
                            data=json.dumps({"email": new_email, "password": new_password}))
         assert resp.status_code == codes.UNPROCESSABLE_ENTITY
@@ -122,7 +122,7 @@ class TestRegister:
         """Can't register with an empty password."""
         new_email = ""
         new_password = ""
-        resp = client.post("/register",
+        resp = client.post("/auth/register",
                            headers=make_headers('POST'),
                            data=json.dumps({"email": new_email, "password": new_password}))
         assert resp.status_code == codes.UNPROCESSABLE_ENTITY
