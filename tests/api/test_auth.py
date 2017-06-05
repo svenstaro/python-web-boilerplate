@@ -17,7 +17,7 @@ class TestLogin:
     """Tests for `api.auth.login`."""
 
     def test_success(self, app, client, user_factory):
-        """Can log in and get back a valid token."""
+        """Can log in and get back a valid auth token."""
         user = user_factory.get()
         resp = client.post("/auth/login",
                            headers=make_headers('POST'),
