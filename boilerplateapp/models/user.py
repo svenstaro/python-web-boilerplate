@@ -49,8 +49,8 @@ class User(db.Model, Timestamp):
 
     def generate_auth_token(self):
         """Generate an auth token and save it to the `current_auth_token` column."""
-        new_auth_token = uuid.uuid4()
-        self.current_auth_token = '{auth_token}'.format(auth_token=new_auth_token)
+        new_auth_token = str(uuid.uuid4())
+        self.current_auth_token = new_auth_token
         self.last_action = datetime.utcnow()
         db.session.add(self)
         db.session.commit()
