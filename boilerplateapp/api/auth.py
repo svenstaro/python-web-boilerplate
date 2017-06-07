@@ -29,9 +29,6 @@ def login(args):
         token = user.current_auth_token
     else:
         token = user.generate_auth_token()
-        user.current_auth_token = token
-        db.session.add(user)
-        db.session.commit()
 
     return ok(data={"token": token})
 
