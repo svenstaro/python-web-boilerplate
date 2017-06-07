@@ -60,7 +60,9 @@ class User(db.Model, Timestamp):
     def has_valid_auth_token(self):
         """Return whether or not the user has a valid auth token."""
         latest_valid_date = datetime.utcnow() - current_app.config['AUTH_TOKEN_TIMEOUT']
-        return self.last_action and self.last_action > latest_valid_date
+        return (self.last_action and
+                self.last_action > latest_valid_date and
+                self.current_auth_token)
 
     @staticmethod
     def get_user_from_login_token(token):
