@@ -6,10 +6,10 @@ venv:
 	venv/bin/pip install -r requirements.txt -r dev-requirements.txt --upgrade
 
 test: venv
-	source ./dev_env.sh && venv/bin/pytest
+	source ./local_env.sh && venv/bin/pytest
 
 lint: venv
-	source ./dev_env.sh && venv/bin/flake8
+	source ./local_env.sh && venv/bin/flake8
 
 docker_test:
 	# Used to automatically run docker-compose to lint and test this
