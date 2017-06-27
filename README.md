@@ -1,6 +1,11 @@
-# Python Web Template
+# Python Web Boilerplate
 
 [![Build Status](https://travis-ci.org/svenstaro/python-web-boilerplate.svg?branch=master)](https://travis-ci.org/svenstaro/python-web-boilerplate)
+
+## About
+This is a boilerplate project made using best practices for getting started quickly
+in a new project. I made this for myself but maybe it will help someone else. Pull
+requests and discussions on best practices welcome!
 
 ## Development setup
 
