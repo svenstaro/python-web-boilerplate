@@ -16,4 +16,4 @@ class TestWhoami:
     def test_cant_access_protected_routes_without_login(self, client):
         """Can't access protected resources when not logged in."""
         resp = client.get("/whoami")
-        assert resp.status_code == codes.UNAUTHORIZED
+        assert resp.status_code == codes.BAD_REQUEST

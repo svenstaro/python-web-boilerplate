@@ -44,7 +44,7 @@ class TestBeforeHandlers:
         url = '/whoami'
         resp = client.get(url, headers=headers)
 
-        assert resp.status_code == codes.UNAUTHORIZED
+        assert resp.status_code == codes.BAD_REQUEST
         assert resp.json['message'] == "'Authorization' not found in headers."
 
     @pytest.mark.parametrize('token', ['invalid', 'Bearer: foobar'])
@@ -59,7 +59,7 @@ class TestBeforeHandlers:
         url = '/whoami'
         resp = client.get(url, headers=headers)
 
-        assert resp.status_code == codes.UNAUTHORIZED
+        assert resp.status_code == codes.BAD_REQUEST
         assert resp.json['message'] == "'Authorization' header has wrong format."
 
     def test_login_fail_other_user(self, app, client, user_factory):
@@ -82,7 +82,7 @@ class TestBeforeHandlers:
 
         resp = client.get(url, headers=headers)
 
-        assert resp.status_code == codes.UNAUTHORIZED
+        assert resp.status_code == codes.BAD_REQUEST
         assert resp.json['message'] == "Invalid login token."
 
     def test_login_fail_invalid_user(self, app, client, user_factory):
@@ -104,7 +104,7 @@ class TestBeforeHandlers:
 
         resp = client.get(url, headers=headers)
 
-        assert resp.status_code == codes.UNAUTHORIZED
+        assert resp.status_code == codes.BAD_REQUEST
         assert resp.json['message'] == "Invalid login token."
 
     def test_login_fail_invalid_auth_token(self, app, client, user_factory):
@@ -125,7 +125,7 @@ class TestBeforeHandlers:
 
         resp = client.get(url, headers=headers)
 
-        assert resp.status_code == codes.UNAUTHORIZED
+        assert resp.status_code == codes.BAD_REQUEST
         assert resp.json['message'] == "Invalid login token."
 
     def test_error_handlers(self, app, client):
