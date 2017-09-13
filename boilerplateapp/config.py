@@ -8,12 +8,7 @@ class Config(object):
 
     DEBUG = False
     TESTING = False
-    SERVER_NAME = 'localhost:5000'
     AUTH_TOKEN_TIMEOUT = timedelta(days=30)
-    SECRET_KEY = """
-        neigh6echeih4eiqueetei2ietha1raitooSahzai6ugh0jahzahm
-        u2»{1³21igh1saWooshi3uxah4oongiuphiox7iephoonahkoiK9u
-    """
 
     # Flask-SQLAlchemy options (see http://flask-sqlalchemy.pocoo.org/2.1/config/)
     SQLALCHEMY_DATABASE_URI = os.environ['SQLALCHEMY_DATABASE_URI']
@@ -30,30 +25,57 @@ class Config(object):
 class ProductionConfig(Config):
     """Production specific configuration."""
 
-    pass
+    SERVER_NAME = 'localhost:5000'
+    SECRET_KEY = """
+        neigh6echeih4eiqueetei2ietha1raitooSahzai6ugh0jahzahm
+        u2»{1³21igh1saWooshi3uxah4oongiuphiox7iephoonahkoiK9u
+    """
 
 
 class StagingConfig(Config):
     """Staging specific configuration."""
 
-    pass
+    SERVER_NAME = 'localhost:5000'
+    SECRET_KEY = """
+        neigh6echeih4eiqueetei2ietha1raitooSahzai6ugh0jahzahm
+        u2»{1³21igh1saWooshi3uxah4oongiuphiox7iephoonahkoiK9u
+    """
+
+
+class DevelopConfig(Config):
+    """Develop specific configuration."""
+
+    SERVER_NAME = 'localhost:5000'
+    SECRET_KEY = """
+        neigh6echeih4eiqueetei2ietha1raitooSahzai6ugh0jahzahm
+        u2»{1³21igh1saWooshi3uxah4oongiuphiox7iephoonahkoiK9u
+    """
 
 
 class TestingConfig(Config):
     """Testing specific configuration."""
 
     TESTING = True
+    SECRET_KEY = """
+        neigh6echeih4eiqueetei2ietha1raitooSahzai6ugh0jahzahm
+        u2»{1³21igh1saWooshi3uxah4oongiuphiox7iephoonahkoiK9u
+    """
 
 
-class DevelopConfig(Config):
-    """Develop specific configuration."""
+class LocalConfig(Config):
+    """Local development specific configuration."""
 
+    SECRET_KEY = """
+        neigh6echeih4eiqueetei2ietha1raitooSahzai6ugh0jahzahm
+        u2»{1³21igh1saWooshi3uxah4oongiuphiox7iephoonahkoiK9u
+    """
     SQLALCHEMY_ECHO = True
 
 
 configs = {
     'production': ProductionConfig,
     'staging': StagingConfig,
-    'testing': TestingConfig,
     'develop': DevelopConfig,
+    'testing': TestingConfig,
+    'local': LocalConfig,
 }
