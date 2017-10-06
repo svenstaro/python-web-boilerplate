@@ -1,6 +1,7 @@
 """Module containing the `User` model."""
 import uuid
-import hmac
+import secrets
+import string
 from datetime import datetime
 
 from sqlalchemy.dialects.postgresql import UUID
@@ -17,7 +18,7 @@ class User(db.Model, Timestamp):
     id = db.Column(UUID(as_uuid=True), primary_key=True, nullable=False, default=uuid.uuid4)
     email = db.Column(db.String(120), unique=True, nullable=False, index=True)
     password_hash = db.Column(db.String(120), nullable=False)
-    current_auth_token = db.Column(db.String(36), index=True)
+    current_auth_token = db.Column(db.String(32), index=True)
     last_action = db.Column(db.DateTime)
 
     def __init__(self, email, password):
@@ -49,7 +50,8 @@ class User(db.Model, Timestamp):
 
     def generate_auth_token(self):
         """Generate an auth token and save it to the `current_auth_token` column."""
-        new_auth_token = str(uuid.uuid4())
+        alphabet = string.ascii_letters + string.digits
+        new_auth_token = ''.join(secrets.choice(alphabet) for i in range(32))
         self.current_auth_token = new_auth_token
         self.last_action = datetime.utcnow()
         db.session.add(self)
@@ -74,6 +76,6 @@ class User(db.Model, Timestamp):
         user_id, auth_token = token.split(':')
         user = db.session.query(User).filter_by(id=user_id).first()
         if user and user.current_auth_token:
-            if hmac.compare_digest(user.current_auth_token, auth_token):
+            if secrets.compare_digest(user.current_auth_token, auth_token):
                 return user
         return None

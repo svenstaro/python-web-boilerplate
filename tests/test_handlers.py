@@ -113,7 +113,7 @@ class TestBeforeHandlers:
 
         login_token = '{user_id}:{auth_token}'.format(
             user_id=user.id,
-            auth_token=uuid.uuid4(),
+            auth_token="my random token",
         )
 
         headers = {
