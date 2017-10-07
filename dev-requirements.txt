@@ -9,7 +9,7 @@ flake8-string-format
 # Testing
 pytest
 pytest-cov
-pytest-greendots
+pytest-colordots
 pytest-flask
 pytest-watch
 hypothesis
