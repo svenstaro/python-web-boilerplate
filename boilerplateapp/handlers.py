@@ -35,6 +35,12 @@ def register_handlers(app):
         if not request.endpoint:
             return
 
+        # W3 defines that OPTIONS must not send credentials
+        # (https://www.w3.org/TR/cors/#preflight-request) and so we can't
+        # require them here for that kind of request.
+        if request.method == 'OPTIONS':
+            return
+
         view = app.view_functions[request.endpoint]
 
         if getattr(view, 'login_exempt', False):
