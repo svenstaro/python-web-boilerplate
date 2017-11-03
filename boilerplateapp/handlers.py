@@ -67,7 +67,7 @@ def register_handlers(app):
         user.last_action = datetime.utcnow()
         db.session.add(user)
         db.session.commit()
-        g.current_user = user
+        g.current_user = db.session.query(User).get(user.id)
 
     @app.after_request
     def add_cors_headers(response):
