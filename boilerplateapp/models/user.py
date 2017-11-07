@@ -74,7 +74,7 @@ class User(db.Model, Timestamp):
             <user uuid>:<auth token>
         """
         user_id, auth_token = token.split(':')
-        user = db.session.query(User).filter_by(id=user_id).first()
+        user = db.session.query(User).get(user_id)
         if user and user.current_auth_token:
             if secrets.compare_digest(user.current_auth_token, auth_token):
                 return user
