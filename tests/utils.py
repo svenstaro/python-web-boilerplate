@@ -26,6 +26,6 @@ def make_headers(method, user=None):
         headers['Authorization'] = 'Bearer {login_token}'.format(login_token=login_token)
 
     if method in ['POST', 'PUT']:
-        headers['Content-Type'] = 'application/json',
+        headers['Content-Type'] = 'application/json'
 
     return headers

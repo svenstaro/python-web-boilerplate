@@ -43,7 +43,7 @@ def _acquire_token(url, username, password):
     if resp.status_code != 200:
         print("ERROR")  # noqa: T003
         try:
-            pprint(resp.json())
+            pprint(resp.json())  # noqa: T003
         except ValueError:
             print(resp)  # noqa: T003
         finally:
@@ -105,4 +105,4 @@ if __name__ == "__main__":
     if args.parseable:
         print(json.dumps(resp.json()))  # noqa: T003
     else:
-        pprint(resp.json())
+        pprint(resp.json())  # noqa: T003
