@@ -3,3 +3,4 @@ __pycache__
 .cache
 .coverage.*
 .coverage
+.pytest_cache
