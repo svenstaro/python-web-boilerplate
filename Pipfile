@@ -1,0 +1,36 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+passlib = "~=1.7.0"
+marshmallow = "~=2.10"
+webargs = "~=3.0"
+alembic = "~=0.9"
+requests = "~=2.18"
+pwgen = "~=0.7"
+"psycopg2" = "*"
+retry = "~=0.9"
+Flask = "~=1.0"
+Flask-SQLAlchemy = "~=2.3"
+"argon2_cffi" = "*"
+SQLAlchemy = "~=1.2"
+SQLAlchemy-Utils = "~=0.33"
+
+[dev-packages]
+flake8 = "*"
+flake8-docstrings = "*"
+flake8-print = "*"
+flake8-commas = "*"
+flake8-bugbear = "*"
+flake8-string-format = "*"
+pytest = "*"
+pytest-cov = "*"
+pytest-colordots = "*"
+pytest-flask = "*"
+pytest-watch = "*"
+hypothesis = "*"
+ipython = "*"
+flask-shell-ipython = "*"
+freezegun = "*"

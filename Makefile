@@ -1,15 +1,14 @@
-default: venv
+default: init
 
-venv:
-	python3 -m venv venv
-	venv/bin/pip install --upgrade pip
-	venv/bin/pip install -r requirements.txt -r dev-requirements.txt --upgrade
+init:
+	pip install pipenv
+	pipenv install --dev
 
 test: venv
-	source ./local_env.sh && venv/bin/pytest
+	pipenv run pytest
 
 lint: venv
-	source ./local_env.sh && venv/bin/flake8
+	pipenv run flake8
 
 docker_test:
 	# Used to automatically run docker-compose to lint and test this
@@ -25,6 +24,3 @@ _inside_docker_test_commands:
 	# run outside of the container context.
 	flake8
 	pytest
-
-clean:
-	rm -rf venv

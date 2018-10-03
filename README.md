@@ -13,9 +13,9 @@ Install all dependencies into a virtualenv which will be created at `venv/`:
 
     make
 
-Set up your environment by sourcing `local_env.sh`.
+Set up your environment by sourcing copying `.env.example` to `.env`
 
-    source local_env.sh
+    cp .env.example .env
 
 For every new shell you need to source this file and you're good to go.
 

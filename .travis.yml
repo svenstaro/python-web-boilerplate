@@ -1,6 +1,6 @@
 sudo: required
 language: python
-install: "pip install -r requirements.txt -r dev-requirements.txt"
+install: "make"
 
 python:
   - "3.6"
@@ -12,8 +12,8 @@ matrix:
     - python: pypy3
 
 script:
-  - flake8
-  - pytest
+  - make lint
+  - make test
 
 services:
   - docker
