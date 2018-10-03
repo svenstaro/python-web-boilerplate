@@ -4,10 +4,10 @@ init:
 	pip install pipenv
 	pipenv install --dev
 
-test: venv
+test: init
 	pipenv run pytest
 
-lint: venv
+lint: init
 	pipenv run flake8
 
 docker_test:
