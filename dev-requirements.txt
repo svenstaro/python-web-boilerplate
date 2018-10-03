@@ -7,7 +7,7 @@ flake8-bugbear
 flake8-string-format
 
 # Testing
-pytest
+pytest~=3.8
 pytest-cov
 pytest-colordots
 pytest-flask
