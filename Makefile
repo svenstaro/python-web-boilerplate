@@ -1,7 +1,7 @@
 default: init
 
 init:
-	pip install pipenv
+	pip install --upgrade pipenv
 	pipenv install --dev
 
 test: init
