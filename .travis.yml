@@ -1,10 +1,9 @@
-sudo: required
+dist: xenial
 language: python
 install: "make"
 
 python:
-  - "3.6"
-  - "3.7-dev"
+  - "3.7"
   - "pypy3"
 
 matrix:
@@ -14,6 +13,9 @@ matrix:
 script:
   - make lint
   - make test
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 
 services:
   - docker
