@@ -10,7 +10,7 @@ matrix:
     - python: pypy3
 
 before_script:
-  - curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+  - pip install poetry
 
 script:
   - make lint
