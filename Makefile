@@ -1,11 +1,10 @@
 default: init
 
 init:
-	pip install --upgrade pipenv
-	pipenv install --dev
+	poetry install
 
 test: init
-	pipenv run pytest
+	poetry run pytest
 
 lint: init
-	pipenv run flake8
+	poetry run flake8

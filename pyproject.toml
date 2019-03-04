@@ -1,9 +1,12 @@
-[[source]]
-url = "https://pypi.org/simple"
-verify_ssl = true
-name = "pypi"
+[tool.poetry]
+name = "python-web-boilerplate"
+version = "0.1.0"
+description = "An opinionated and best-practices boilerplate for a modern Flask-based web backend"
+authors = ["Sven-Hendrik Haase <svenstaro@gmail.com>"]
+license = "MIT"
 
-[packages]
+[tool.poetry.dependencies]
+python = "*"
 passlib = "~=1.7.0"
 marshmallow = "~=2.10"
 webargs = "~=3.0"
@@ -18,7 +21,7 @@ Flask-SQLAlchemy = "~=2.3"
 SQLAlchemy = "~=1.2"
 SQLAlchemy-Utils = "~=0.33"
 
-[dev-packages]
+[tool.poetry.dev-dependencies]
 flake8 = "*"
 flake8-docstrings = "*"
 flake8-print = "*"
@@ -33,3 +36,7 @@ hypothesis = "*"
 ipython = "*"
 flask-shell-ipython = "*"
 freezegun = "*"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
