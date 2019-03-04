@@ -1,6 +1,5 @@
 dist: xenial
 language: python
-install: "make"
 
 python:
   - "3.7"
