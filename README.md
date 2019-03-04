@@ -1,6 +1,7 @@
 # Python Web Boilerplate
 
 [![Build Status](https://travis-ci.org/svenstaro/python-web-boilerplate.svg?branch=master)](https://travis-ci.org/svenstaro/python-web-boilerplate)
+[![codecov](https://codecov.io/gh/svenstaro/python-web-boilerplate/branch/master/graph/badge.svg)](https://codecov.io/gh/svenstaro/python-web-boilerplate)
 [![license](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/svenstaro/python-web-boilerplate/blob/master/LICENSE)
 
 ## About
