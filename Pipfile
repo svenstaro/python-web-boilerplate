@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 passlib = "~=1.7.0"
-marshmallow = "~=2.10"
+marshmallow = "~=2.18"
 webargs = "~=3.0"
 alembic = "~=0.9"
 requests = "~=2.18"
