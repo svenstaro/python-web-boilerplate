@@ -872,7 +872,7 @@ description = "Declarative parsing and validation of HTTP request objects, with 
 name = "webargs"
 optional = false
 python-versions = "*"
-version = "5.1.3"
+version = "5.2.0"
 
 [package.dependencies]
 marshmallow = ">=2.15.2"
@@ -895,7 +895,7 @@ python-versions = "*"
 version = "0.5"
 
 [metadata]
-content-hash = "df4ceab45918481c29c9379f4ec0d38f2ea5094de84a96c5f146c4c7c8500558"
+content-hash = "6a0ecda0ef8f0f6aefe67479fa394241a6345efe0779452bc81af393709c610b"
 python-versions = "*"
 
 [metadata.hashes]
@@ -977,6 +977,6 @@ typing = ["4027c5f6127a6267a435201981ba156de91ad0d1d98e9ddc2aa173453453492d", "5
 urllib3 = ["06330f386d6e4b195fbfc736b297f58c5a892e4440e54d294d7004e3a9bbea1b", "cc44da8e1145637334317feebd728bd869a35285b93cbb4cca2577da7e62db4f", "61bf29cada3fc2fbefad4fdf059ea4bd1b4a86d2b6d15e1c7c0b582b9752fe39", "de9529817c93f27c8ccbfead6985011db27bd0ddfcdb2d86f3f663385c6a9c22"]
 watchdog = ["965f658d0732de3188211932aeb0bb457587f04f63ab4c1e33eab878e9de961d"]
 wcwidth = ["3df37372226d6e63e1b1e1eda15c594bca98a22d33a23832a90998faa96bc65e", "f4ebe71925af7b40a864553f761ed559b43544f8f71746c2d756c7fe788ade7c"]
-webargs = ["097e6ad80942d96160411b1448eaa562852b028a4af8115bfd7f3982effbdfb0", "b0d1d614007cee5d5fc292ae71e72e9057d9e9f74d6817e5e37f701211ef0a28", "e53d07008e31beef2b55e748d8c6531d10a3419f8921afa7e475b72eb246d48b"]
+webargs = ["15ddf90d7bfe05c9db87c9f22215cacc1228da98a8e7bd62508d9d8020935123", "75c568581af6ef6345156fc8621a7735ce6846bf9d7ec058aa6ea9cc3a620580", "e2381557f0a5e4db37dbbddc2833b0f3aa6dca58b5ced4ca6b14620f685a643f"]
 werkzeug = ["c3fd7a7d41976d9f44db327260e263132466836cef6f91512889ed60ad26557c", "d5da73735293558eb1651ee2fddc4d0dedcfa06538b8813a2e20011583c9e49b"]
 win-unicode-console = ["d4142d4d56d46f449d6f00536a73625a871cba040f0bc1a2e305a04578f07d1e"]
