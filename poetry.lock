@@ -293,7 +293,7 @@ description = "Replace default `flask shell` command by similar command running 
 name = "flask-shell-ipython"
 optional = false
 python-versions = "*"
-version = "0.4.0"
+version = "0.4.1"
 
 [package.dependencies]
 IPython = ">=5.0.0"
@@ -929,7 +929,7 @@ flake8-polyfill = ["12be6a34ee3ab795b19ca73505e7b55826d5f6ad7230d31b18e106400169
 flake8-print = ["5010e6c138b63b62400da4b06afa33becc5e08bd1fcce9af3752445cf3342f54"]
 flake8-string-format = ["68ea72a1a5b75e7018cae44d14f32473c798cf73d75cbaed86c6a9a907b770b2", "774d56103d9242ed968897455ef49b7d6de272000cfa83de5814273a868832f1"]
 flask = ["2271c0070dbcb5275fad4a82e29f23ab92682dc45f9dfbc22c02ba9b9322ce48", "a080b744b7e345ccfcbc77954861cb05b3c63786e93f2b3875e0913d44b43f05"]
-flask-shell-ipython = ["1a5a9f5479ff9380528ff1896c000160fc2195d9a37b8e4cdd218fc0ce594738", "349b755e17c99f021458250ae18fa234459f35e13a4db82189036b19b14ee1d6"]
+flask-shell-ipython = ["f212b4fad6831edf652799c719cd05fd0716edfaa5506eb41ff9ef09109890d3", "fb3b390f4dc03d7a960c62c5b51ce4deca19ceff77e4db3d4670012adc529ebd"]
 flask-sqlalchemy = ["0c9609b0d72871c540a7945ea559c8fdf5455192d2db67219509aed680a3d45a", "8631bbea987bc3eb0f72b1f691d47bd37ceb795e73b59ab48586d76d75a7c605"]
 freezegun = ["6cb82b276f83f2acce67f121dc2656f4df26c71e32238334eb071170b892a278", "e839b43bfbe8158b4d62bb97e6313d39f3586daf48e1314fb1083d2ef17700da"]
 funcsigs = ["330cc27ccbf7f1e992e69fef78261dc7c6569012cf397db8d3de0234e6c937ca", "a7bb0f2cf3a3fd1ab2732cb49eba4252c2af4240442415b4abce3b87022a8f50"]
