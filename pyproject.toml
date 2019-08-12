@@ -8,7 +8,7 @@ license = "MIT"
 [tool.poetry.dependencies]
 python = "*"
 passlib = "~=1.7.0"
-marshmallow = "~=2.19"
+marshmallow = "~=2.20"
 webargs = "~=5.4"
 alembic = "~=1.0"
 requests = "~=2.18"
