@@ -33,3 +33,9 @@ Afterwards, type
     flask run
 
 to run the development server.
+
+## Running the tests
+
+Start a local postgresql server and run:
+
+    poetry run pytest

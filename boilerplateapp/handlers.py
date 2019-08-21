@@ -25,7 +25,7 @@ def register_handlers(app):
         'Content-Type' to be JSON.
         """
         if request.method in ['POST', 'PUT']:
-            if request.headers['Content-Type'] != 'application/json':
+            if request.headers.get('Content-Type') != 'application/json':
                 return bad_request("'Content-Type' must be 'application/json'.")
 
     @app.before_request
