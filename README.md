@@ -11,7 +11,7 @@ requests and discussions on best practices welcome!
 
 ## Development setup
 
-Install all dependencies into a virtualenv which will be managed by `pipenv`.
+Install all dependencies into a virtualenv which will be managed by `poetry`.
 
     make
 
