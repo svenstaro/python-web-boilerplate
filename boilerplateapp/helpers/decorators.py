@@ -8,11 +8,11 @@ def login_exempt(f):
     This means that using this decorator a function can be marked for anonymous access.
 
     Example:
-
         @api.route('/login', methods=['POST'])
         @login_exempt
         def login():
             pass
+
     """
     @functools.wraps(f)
     def decorated_function(*args, **kwargs):
