@@ -7,7 +7,7 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "*"
-passlib = "~=1.7.0"
+passlib = "~=1.7.2"
 marshmallow = "~=2.20"
 webargs = "~=5.5"
 alembic = "~=1.3"
