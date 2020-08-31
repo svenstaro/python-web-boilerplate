@@ -5,3 +5,7 @@ __pycache__
 .coverage.*
 .coverage
 .pytest_cache
+
+# custom exclude
+TODO
+/old

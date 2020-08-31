@@ -1,5 +1,12 @@
 """ factoty method for FastAPI web service instance  """
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
+from application.config import Settings
+from application.storage import db_init
+from tortoise import run_async
+
+# setting configuration as a dependencies for easier reuse of the factory
+def get_config():
+    return Settings()
 
 
 def app_factory():
@@ -9,7 +16,6 @@ def app_factory():
         description="Basic python web service boilerplate with FastAPI",
         version="0.0.1"
         )
-
     # midldeware prometheus
 
 
@@ -22,9 +28,11 @@ def app_factory():
             router,
             prefix="",
             tags=[],
-            dependencies=[],
+            dependencies=[Depends(get_config)],
             responses={}
             )
-
+    
+    # db connection init
+    run_async(db_init())
 
     return app

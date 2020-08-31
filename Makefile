@@ -11,4 +11,9 @@ lint: init
 
 .PHONY: docker-run
 docker-run:
-	docker build --no-cache -t python-boilerplate . && docker run --rm -it -p 5000:5000 --name python-boilerplate python-boilerplate
+	docker-compose down
+	docker-compose up -d postgres
+	sleep 3
+	docker-compose up --build app
+
+	# docker build --no-cache -t python-boilerplate . && docker run --rm -it -p 5000:5000 --name python-boilerplate --env db_host=postgres python-boilerplate
