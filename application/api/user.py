@@ -21,15 +21,11 @@ async def register_user(usr: UserInput):
     ## Output:
     - bool: True if registration was succesful, False otherwise
     """
-    await Users(name=usr.name, pwhash=usr.password).save()
-    # try:
-    #     new_usr = User(name=usr.name, pwhash=hasher.hash(f"{usr.name}{usr.password}"))
-    #     print(new_usr)
-    #     res = await new_usr.save()
-    #     logger.info(res)
-    #     return True if res is not None else False
-    # except Exception as ex:
-    #     logger.error(f"Could not save usr due to {ex}")
-    #     return False
+    try:
+        await Users(name=usr.name, pwhash=hasher.hash(f"{usr.name}{usr.password}")).save()
+        return True
+    except Exception as ex:
+        logger.error(f"Could not save usr due to {ex}")
+        return False
 
 
