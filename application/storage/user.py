@@ -4,7 +4,7 @@ from tortoise import fields
 from pydantic import BaseModel
 
 
-class User(Model):
+class Users(Model):
     id = fields.IntField(pk=True)
     name = fields.CharField(max_length=120, required=True)
     pwhash = fields.CharField(max_length=360, required=True)
@@ -15,6 +15,8 @@ class User(Model):
 
 class UserInput(BaseModel):
     name: str
+    password: str
+    
 
 
 class UserOutput(BaseModel):

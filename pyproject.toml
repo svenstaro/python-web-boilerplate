@@ -13,6 +13,8 @@ orm = "^0.1.5"
 asyncpg = "^0.21.0"
 hypercorn = "^0.10.2"
 tortoise-orm = "^0.16.14"
+python-jose = {version = "^3.2", extras = ["cryptography"]}
+passlib = "^1.7.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "*"

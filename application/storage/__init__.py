@@ -8,4 +8,4 @@ async def db_init(db_url: str = "postgres://postgres:postgres@postgres:5432/boil
         modules={"models": ["application.storage.user"]}
         )
 
-    await Tortoise.generate_schemas()  # should not be ran on each start
+    # await Tortoise.generate_schemas()  # move out into setup script to avoid multiprocessing problems

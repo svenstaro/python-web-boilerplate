@@ -2,7 +2,8 @@
 from fastapi import FastAPI, Depends
 from application.config import Settings
 from application.storage import db_init
-from tortoise import run_async
+from tortoise import Tortoise
+
 
 # setting configuration as a dependencies for easier reuse of the factory
 def get_config():
@@ -31,8 +32,23 @@ def app_factory():
             dependencies=[Depends(get_config)],
             responses={}
             )
+
+    from application.api.user import router as usr_router
+    app.include_router(
+            usr_router,
+            prefix="",
+            tags=[],
+            dependencies=[],
+            responses={}
+            )
     
     # db connection init
-    run_async(db_init())
+    @app.on_event("startup")
+    async def startup_event():
+        await db_init()
+
+    @app.on_event("shutdown")
+    async def shutdown_event():
+        await Tortoise.close_connections()
 
     return app
