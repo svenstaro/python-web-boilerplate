@@ -1,5 +1,6 @@
 """ module for user intarcation """
 from application.storage.user import Users, UserInput, UserOutput
+from application.storage.token import UserTokens
 from application.hasher import hasher
 from fastapi import APIRouter
 from typing import Optional
@@ -29,3 +30,11 @@ async def register_user(usr: UserInput):
         return False
 
 
+@router.get("/auth", response_model=bool)
+async def loging():
+    return True
+
+
+@router.get("/whoami", response_model=Optional[UserOutput])
+async def whoami():
+    return None
