@@ -1,13 +1,12 @@
 """ ORM models and pydantic models for the user access tokens """
-from tortoise import Model
-from tortoise import fields
+from tortoise import fields, models
 from pydantic import BaseModel
 from datetime import timedelta
 import datetime
 import uuid
 
 
-class UserTokens(Model):
+class UserTokens(models.Model):
     id = fields.IntField(pk=True)
     usr_id = fields.ForeignKeyField('models.Users')
     token_id = fields.CharField(max_length=120, unique=True)
@@ -15,7 +14,6 @@ class UserTokens(Model):
     access_origin = fields.CharField(max_length=360)
 
     def __init__(self, usr_id: int, access_origin: str):
-        
         self.usr_id = usr_id
         self.access_origin = access_origin
         self.expiry = datetime.datetime.now() + timedelta(days=7)
@@ -23,6 +21,7 @@ class UserTokens(Model):
 
     def __repr__(self):
         return f"{self.usr_id}: {expiry} {access_origin}"
+
 
 
 class Token(BaseModel):

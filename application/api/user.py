@@ -25,7 +25,7 @@ async def register_user(usr: UserInput):
     - bool: True if registration was succesful, False otherwise
     """
     try:
-        usr = Users(name=usr.name, password=usr.password)
+        usr = Users(usr=usr)
         await usr.save()
         return True
     except Exception as ex:
@@ -88,3 +88,7 @@ async def login(usr: UserInput, access_origin: str):
 @router.get("/whoami", response_model=Optional[UserOutput])
 async def whoami():
     return None
+
+@router.delete("/delete/{token}", response_model=bool)
+def delete_me():
+    return True
