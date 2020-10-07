@@ -1,15 +1,13 @@
 """ factoty method for FastAPI web service instance  """
 from fastapi import FastAPI, Depends
 from application.config import Settings
-from application.storage.db import db_uri, metadata
+from application.storage import db_uri, metadata, User, UserTokens
 import sqlalchemy
 
 # setting configuration as a dependencies for easier reuse of the factory
 def get_config():
     return Settings()
 
-
-# creating tables. each session/connection will be etsablished in separate APIRouter
 
 def app_factory():
     """ Factory method for creating web service instacne and connecting to all middleware, routes, etc. """
@@ -24,7 +22,14 @@ def app_factory():
     async def start_dbs():
         engine = sqlalchemy.create_engine(db_uri)
         metadata.create_all(engine)
-    
+        await User.__database__.connect()
+        await UserTokens.__database__.connect()
+   
+    @app.on_event("shutdown")
+    async def shutdown_db_connection():
+        await User.__database__.close()
+        await UserTokens.__database__.close()
+
     # midldeware prometheus
 
 

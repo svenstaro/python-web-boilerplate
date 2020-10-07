@@ -14,7 +14,7 @@ async def get_hash(usr: UserInput) -> str:
     return str(hasher.hash(f"{usr.name}{usr.password}"))
 
 
-async def verify(self, target: UserModel, origin: UserInput) -> bool:
+async def verify(target: UserModel, origin: UserInput) -> bool:
     if target.name != origin.name:
         return False
     return hasher.verify(f"{origin.name}{origin.password}", target.pwhash)
