@@ -1,3 +1,3 @@
 #!/bin/bash
 
-hypercorn app:app -b 0.0.0.0:5000 -w 1 
+hypercorn -b 0.0.0.0:5000 -w 1 --error-logfile - --access-logfile - app:app 

@@ -14,5 +14,7 @@ services:
                 build: .
                 ports:
                         - 5000:5000
+                environment:
+                        LOG_LEVEL: debug
                 depends_on:
                         - postgres

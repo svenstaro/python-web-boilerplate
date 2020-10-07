@@ -1,14 +1,15 @@
 """ factoty method for FastAPI web service instance  """
 from fastapi import FastAPI, Depends
 from application.config import Settings
-from application.storage import db_init
-from tortoise import Tortoise
-
+from application.storage.db import db_uri, metadata
+import sqlalchemy
 
 # setting configuration as a dependencies for easier reuse of the factory
 def get_config():
     return Settings()
 
+
+# creating tables. each session/connection will be etsablished in separate APIRouter
 
 def app_factory():
     """ Factory method for creating web service instacne and connecting to all middleware, routes, etc. """
@@ -17,6 +18,13 @@ def app_factory():
         description="Basic python web service boilerplate with FastAPI",
         version="0.0.1"
         )
+
+    # db initilalization
+    @app.on_event("startup")
+    async def start_dbs():
+        engine = sqlalchemy.create_engine(db_uri)
+        metadata.create_all(engine)
+    
     # midldeware prometheus
 
 
@@ -41,14 +49,5 @@ def app_factory():
             dependencies=[],
             responses={}
             )
-    
-    # db connection init
-    @app.on_event("startup")
-    async def startup_event():
-        await db_init()
-
-    @app.on_event("shutdown")
-    async def shutdown_event():
-        await Tortoise.close_connections()
 
     return app
