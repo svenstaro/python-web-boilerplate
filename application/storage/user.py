@@ -1,13 +1,14 @@
 """ ORM models and pydantic schemas of the user table """
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 import databases
 import orm
 from .db import db_uri, metadata
+from typing import Optional
 
 
 class UserOutput(BaseModel):
-    id: int
-    name: str
+    name: Optional[str] = Field(None, title="Unique name of the user if usr exists")
+    token_status: Optional[bool] = Field(None, title="State of the token: present, active (True) or expired (False)")
 
 
 class UserInput(BaseModel):

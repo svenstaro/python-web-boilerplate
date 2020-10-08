@@ -18,11 +18,10 @@ class UserTokens(orm.Model):
 
     id = orm.Integer(primary_key=True)
     usr = orm.ForeignKey(User)
-    token_id = orm.String(max_length=120, unique=True)
+    token = orm.String(max_length=120, unique=True)
     expiry = orm.DateTime()
     access_origin = orm.String(max_length=360)
 
 
 class Token(BaseModel):
-    token_id: str 
-    access_origin: str
+    token: str 
