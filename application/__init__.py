@@ -1,6 +1,7 @@
 """ factoty method for FastAPI web service instance  """
 from fastapi import FastAPI, Depends
 from application.config import Settings
+from starlette_exporter import PrometheusMiddleware, handle_metrics
 from application.storage import db_uri, metadata, User, UserTokens
 import sqlalchemy
 
@@ -31,10 +32,8 @@ def app_factory():
         await UserTokens.__database__.close()
 
     # midldeware prometheus
-
-
-    # middleware CORS
-
+    app.add_middleware(PrometheusMiddleware, app_name="boilerplate", prefix='fastapi_boilerplate')
+    app.add_route("/metrics", handle_metrics)
 
     # routes
     from application.api.health import router
