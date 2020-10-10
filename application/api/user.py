@@ -27,15 +27,15 @@ async def register_user(usr: UserInput):
     - bool: True if registration was succesful, False otherwise
     """
     try:
-        await User.objects.create(name=usr.name, pwhash=await get_hash(usr))
+        await User.objects.create(name=usr.name, pwhash=get_hash(usr))
         return True
     except Exception as ex:
         logger.error(f"Could not save usr due to {ex}")
         return False
 
 
-@router.post("/auth", response_model=Token)
-async def login(usr: UserInput, access_origin: str):
+@router.post("/auth", response_model=Optional[Token])
+async def auth(usr: UserInput, access_origin: str):
     """
     # Login existing user
     ---
@@ -52,7 +52,7 @@ async def login(usr: UserInput, access_origin: str):
     now = datetime.datetime.now()
     try:
         exist_usr = await User.objects.get(name=usr.name)
-        if exist_usr is not None and await verify(exist_usr, usr):
+        if exist_usr is not None and verify(exist_usr, usr):
             # check for token, create/update if needed
             try:
                 # TODO: it looks like a bug or unfinished implementation:
@@ -73,41 +73,41 @@ async def login(usr: UserInput, access_origin: str):
                 return Token(token=access_token)
             except Exception as ex:
                 logger.error(f"Could not fetch/create token due to {ex}")
-                return HTTPException(status_code=500, detail="problems with creating/getting token")
+                return None
         else:
             # this is wrong password for existing user
             logger.error(f"user: {usr.name} has given wrong password")
-            return HTTPException(status_code=403, detail="user can not be authenticated")
+            raise HTTPException(status_code=403, detail="user can not be authenticated")
     except Exception as ex:
         logger.error(f"could not fetch user due to {ex}")
-        return HTTPException(status_code=500, detail="no user fetched")
+        return None
 
 
 @router.get("/whoami", response_model=UserOutput)
-async def whoami(request: Request, auth: Optional[str] = Header(None)):
+async def whoami(request: Request, auth_token: str = Header(...)):
     """
     Return user for currently valid token/access_origin if any
 
     ## Params:
-    - in header "auth" token for a specific user
+    - in header "auth-token" str token for a specific user
 
     ## Return:
-    - UserOutput if token is applicable, None otherwise
+    - UserOutput if token is applicable
 
     """
     now = datetime.datetime.now()
-    tkn = None if auth is None else auth
-    if tkn is not None:
-        usrtkn = await UserTokens.objects.get(token=tkn)
-        if not usrtkn:
-            return HTTPException(status_code=404, detail="No such token")
-        usr = await User.objects.get(id=usrtkn.usr)
-        if not usr:
-            return HTTPException(status_code=500, detail="User missing for provided token")
-        tkn_status = True if now <= usrtkn.expiry else False
-        return UserOutput(name=usr.name, token_status=tkn_status)
-    logger.warn("no token supplied")
-    return UserOutput()
+    try:
+        usrtkn = await UserTokens.objects.get(token=auth_token)
+        try:
+            usr = await User.objects.get(id=usrtkn.usr)
+        except Exception as ex:
+            logger.error(f"no user found for id: {usrtkn.usr}")
+            return UserOutput()
+        status = usrtkn.expiry >= now
+        return UserOutput(name=usr.name, token_status=status)
+    except Exception as ex:
+        logger.error(f"no user collected for provided token: {auth_token}")
+        raise HTTPException(404, detail="No such token")
 
 
 @router.delete("/delete", response_model=bool)
@@ -126,7 +126,7 @@ async def delete_me(usr: UserInput):
     try:
         exist_usr = await User.objects.get(name=usr.name)
         if exist_usr:
-            valid = await verify(exist_usr, usr)
+            valid = verify(exist_usr, usr)
             if valid:
                 # TODO: need to check more in depth if cascade delete is implemented
                 tokens = await UserTokens.objects.filter(usr=exist_usr.id).all()

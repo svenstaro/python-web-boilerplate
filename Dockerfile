@@ -10,6 +10,7 @@ RUN ./dependecies.sh
 
 COPY app.py /app
 COPY application/ /app/application
+COPY test/ /app/test
 COPY run.sh /app
 RUN chmod +x run.sh
 

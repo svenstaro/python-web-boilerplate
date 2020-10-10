@@ -19,9 +19,3 @@ class DBSettings(BaseSettings):
     db_password: Optional[str]
     db_database: Optional[str]
 
-    # @validator('db_host', 'db_port', 'db_user', 'db_password', 'db_database')
-    def all_values_are_present(self) -> bool:
-        if v is not None:
-            return True
-        return False
-

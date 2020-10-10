@@ -28,8 +28,8 @@ def app_factory():
    
     @app.on_event("shutdown")
     async def shutdown_db_connection():
-        await User.__database__.close()
-        await UserTokens.__database__.close()
+        await User.__database__.disconnect()
+        await UserTokens.__database__.disconnect()
 
     # midldeware prometheus
     app.add_middleware(PrometheusMiddleware, app_name="boilerplate", prefix='fastapi_boilerplate')
