@@ -9,6 +9,11 @@ test: init
 lint: init
 	poetry run flake8
 
+.PHONY: run-app
+run-app:
+	docker build -t boilerplate . && docker run -p 5000:5000 --env app_name --env secret --env hash_algo --env db_host --env db_port --env db_user --env db_password --env db_database
+
+
 .PHONY: docker-run
 docker-run:
 	docker-compose down

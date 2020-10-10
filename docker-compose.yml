@@ -25,6 +25,14 @@ services:
                 ports:
                         - 5000:5000
                 environment:
-                        LOG_LEVEL: debug
+                        - LOG_LEVEL=debug
+                        - app_name
+                        - secret
+                        - hash_algo
+                        - db_host
+                        - db_port
+                        - db_user
+                        - db_password
+                        - db_database
                 depends_on:
                         - postgres
