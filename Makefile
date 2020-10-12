@@ -11,7 +11,8 @@ lint: init
 
 .PHONY: run-app
 run-app:
-	docker build -t boilerplate . && docker run -p 5000:5000 --env app_name --env secret --env hash_algo --env db_host --env db_port --env db_user --env db_password --env db_database
+	docker build -t boilerplate . && \
+		docker run -p 5000:5000 --env-file .env.local --network="host" boilerplate
 
 
 .PHONY: docker-run

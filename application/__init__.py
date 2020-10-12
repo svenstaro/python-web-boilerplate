@@ -1,13 +1,13 @@
 """ factoty method for FastAPI web service instance  """
 from fastapi import FastAPI, Depends
-from application.config import Settings
+from application.config import Configuration
 from starlette_exporter import PrometheusMiddleware, handle_metrics
 from application.storage import db_uri, metadata, User, UserTokens
 import sqlalchemy
 
 # setting configuration as a dependencies for easier reuse of the factory
 def get_config():
-    return Settings()
+    return Configuration()
 
 
 def app_factory():

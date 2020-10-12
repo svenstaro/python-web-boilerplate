@@ -1,10 +1,10 @@
 """ global hasher context object """
 from passlib.context import CryptContext
 from application.storage.user import UserInput, UserModel
-from application.config import HashSetting
+from application.config import Configuration
 
 
-hasher = CryptContext(schemes=[HashSetting().hash_algo], deprecated="auto")
+hasher = CryptContext(schemes=[Configuration().hash_algo], deprecated="auto")
 
 
 # TODO: orm does not play well with __init__ method

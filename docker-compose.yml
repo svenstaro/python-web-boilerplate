@@ -6,8 +6,8 @@ services:
                 image: postgres
                 environment:
                         POSTGRES_DB: boilerplate
-                        POSTGRES_PASSWORD: postgres
-                        POSTGRES_USER: postgres
+                        POSTGRES_PASSWORD: fastapiisawesome
+                        POSTGRES_USER: boilerplate
                 hostname: postgres
 
         test:
@@ -16,8 +16,8 @@ services:
                 ports:
                         - 5000:5000
                 environment:
-                        LOG_LEVEL: debug
-                        ENV: test
+                        - LOG_LEVEL=debug
+                        - ENV=test
                 depends_on:
                         - postgres
         app:
@@ -34,5 +34,6 @@ services:
                         - db_user
                         - db_password
                         - db_database
+                        - ENV=local
                 depends_on:
                         - postgres

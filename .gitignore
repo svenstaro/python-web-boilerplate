@@ -1,3 +1,39 @@
+*.pyc
+
+# Packages
+*.egg
+!/tests/**/*.egg
+/*.egg-info
+/dist/*
+build
+_build
+.cache
+*.so
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+.pytest_cache
+
+.DS_Store
+.idea/*
+.python-version
+.vscode/*
+
+/test.py
+
+/setup.cfg
+MANIFEST.in
+/setup.py
+.mypy_cache
+
+.venv
+/releases/*
+pip-wheel-metadata
+/poetry.toml
 venv
 .env
 __pycache__
@@ -6,6 +42,4 @@ __pycache__
 .coverage
 .pytest_cache
 
-# custom exclude
-TODO
-/old
+.env.*
