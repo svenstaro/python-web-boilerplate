@@ -7,7 +7,6 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.8"
-SQLAlchemy = "^1.3"
 fastapi = "^0.61.0"
 orm = "^0.1.5"
 asyncpg = "^0.21.0"
@@ -16,11 +15,11 @@ hypercorn = "^0.10.2"
 python-jose = {version = "^3.2", extras = ["cryptography"]}
 passlib = "^1.7.2"
 starlette_exporter = "^0.5.0"
-pytest-mock = "^3.3.1"
 python-dotenv = "^0.14.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "*"
+pytest-mock = "^3.3.1"
 pytest-cov = "*"
 
 [build-system]
