@@ -15,6 +15,5 @@ def get_db_uri(conf: Configuration) -> str:
     return f"postgresql://{conf.db_user}:{conf.db_password}@{conf.db_host}:{conf.db_port}/{conf.db_database}"
 
 db_uri = get_db_uri(conf)
-print(db_uri)
 database = databases.Database(db_uri)
 metadata = sqlalchemy.MetaData()

@@ -11,7 +11,7 @@ from datetime import timedelta
 import uuid
 
 router = APIRouter()
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.ERROR)  # set to DEBUG for development
 
 
 @router.post("/register", response_model=bool)
@@ -128,7 +128,6 @@ async def delete_me(usr: UserInput):
         if exist_usr:
             valid = verify(exist_usr, usr)
             if valid:
-                # TODO: need to check more in depth if cascade delete is implemented
                 tokens = await UserTokens.objects.filter(usr=exist_usr.id).all()
                 # TODO: to asynchronize this code
                 for t in tokens:

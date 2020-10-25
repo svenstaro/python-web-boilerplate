@@ -8,8 +8,7 @@ hasher = CryptContext(schemes=[Configuration().hash_algo], deprecated="auto")
 
 
 # TODO: orm does not play well with __init__ method
-# sowe I have to use external functionality to create hash, which is a bit less secure than having it in constructor
-
+# I have to use external functionality to create hash, which is a bit less secure than having it in constructor
 def get_hash(usr: UserInput) -> str:
     return str(hasher.hash(f"{usr.name}{usr.password}"))
 

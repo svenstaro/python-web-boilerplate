@@ -8,6 +8,5 @@ router = APIRouter()
 
 @router.get("/health", response_model=str)
 async def health_check(config: str = Depends(get_config)):
-    print(f"{config}")
     return "Healthy!"
 
