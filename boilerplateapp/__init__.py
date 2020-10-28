@@ -2,7 +2,7 @@
 from fastapi import FastAPI, Depends
 from boilerplateapp.config import Configuration
 from starlette_exporter import PrometheusMiddleware, handle_metrics
-from boilerplateapp.storage import db_uri, metadata, User, UserTokens
+from boilerplateapp.storage import db_uri, metadata, database
 import sqlalchemy
 
 # setting configuration as a dependencies for easier reuse of the factory
@@ -23,16 +23,14 @@ def app_factory():
     async def start_dbs():
         engine = sqlalchemy.create_engine(db_uri)
         metadata.create_all(engine)
-        await User.__database__.connect()
-        await UserTokens.__database__.connect()
+        await database.connect()
    
     @app.on_event("shutdown")
     async def shutdown_db_connection():
-        await User.__database__.disconnect()
-        await UserTokens.__database__.disconnect()
+        await database.disconnect()
 
     # midldeware prometheus
-    app.add_middleware(PrometheusMiddleware, app_name="boilerplate", prefix='fastapi_boilerplate')
+    app.add_middleware(PrometheusMiddleware)
     app.add_route("/metrics", handle_metrics)
 
     # routes

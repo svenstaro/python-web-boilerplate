@@ -2,7 +2,7 @@
 from pydantic import BaseModel, Field
 import databases
 import orm
-from .db import db_uri, metadata
+from .db import db_uri, metadata, database 
 from typing import Optional
 
 
@@ -24,7 +24,7 @@ class UserModel(BaseModel):
 class User(orm.Model):
     """ User DAO """
     __tablename__ = "users"
-    __database__ = databases.Database(db_uri)
+    __database__ = database
     __metadata__ = metadata
 
     id = orm.Integer(primary_key=True)

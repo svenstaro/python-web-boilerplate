@@ -26,6 +26,9 @@ Once the app is running
 1. Swagger can be found on `localhost:5000/docs`
 2. Prometheus metrics on `localhost:5000/metrics`
 
+Default settings:
+1. passlib hash algo: argon2 
+
 ## Setup
 Application will be searching for a configuration file `.env.<ENV>`
 
