@@ -1,5 +1,5 @@
 import pytest
-from application import app_factory
+from boilerplateapp import app_factory
 
 
 @pytest.fixture

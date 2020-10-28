@@ -1,4 +1,4 @@
-from application.storage import UserInput, User, UserTokens
+from boilerplateapp.storage import UserInput, User, UserTokens
 from fastapi.testclient import TestClient
 import uuid
 

@@ -1,7 +1,7 @@
 """ module for user intarcation """
-from application.storage.user import User, UserInput, UserOutput
-from application.hasher import get_hash, verify
-from application.storage.token import UserTokens, Token
+from boilerplateapp.storage.user import User, UserInput, UserOutput
+from boilerplateapp.hasher import get_hash, verify
+from boilerplateapp.storage.token import UserTokens, Token
 from fastapi import APIRouter, HTTPException, Request, Header
 from typing import Optional
 from fastapi.logger import logger

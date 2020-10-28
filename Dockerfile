@@ -9,8 +9,8 @@ RUN chmod +x dependecies.sh
 RUN ./dependecies.sh
 
 COPY app.py /app
-COPY application/ /app/application
-COPY test/ /app/test
+COPY boilerplateapp/ /app/boilerplateapp
+COPY tests/ /app/tests
 COPY run.sh /app
 RUN chmod +x run.sh
 

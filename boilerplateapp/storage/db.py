@@ -2,7 +2,7 @@
 import sqlalchemy
 import orm
 import databases
-from application.config import Configuration
+from boilerplateapp.config import Configuration
 
 
 conf = Configuration()

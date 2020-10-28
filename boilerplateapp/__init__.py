@@ -1,8 +1,8 @@
 """ factoty method for FastAPI web service instance  """
 from fastapi import FastAPI, Depends
-from application.config import Configuration
+from boilerplateapp.config import Configuration
 from starlette_exporter import PrometheusMiddleware, handle_metrics
-from application.storage import db_uri, metadata, User, UserTokens
+from boilerplateapp.storage import db_uri, metadata, User, UserTokens
 import sqlalchemy
 
 # setting configuration as a dependencies for easier reuse of the factory
@@ -36,7 +36,7 @@ def app_factory():
     app.add_route("/metrics", handle_metrics)
 
     # routes
-    from application.api.health import router
+    from boilerplateapp.api.health import router
     app.include_router(
             router,
             prefix="",
@@ -45,7 +45,7 @@ def app_factory():
             responses={}
             )
 
-    from application.api.user import router as usr_router
+    from boilerplateapp.api.user import router as usr_router
     app.include_router(
             usr_router,
             prefix="",

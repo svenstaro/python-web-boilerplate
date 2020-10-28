@@ -1,7 +1,7 @@
 """ global hasher context object """
 from passlib.context import CryptContext
-from application.storage.user import UserInput, UserModel
-from application.config import Configuration
+from boilerplateapp.storage.user import UserInput, UserModel
+from boilerplateapp.config import Configuration
 
 
 hasher = CryptContext(schemes=[Configuration().hash_algo], deprecated="auto")

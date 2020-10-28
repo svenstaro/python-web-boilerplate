@@ -1,3 +1,3 @@
-from application import app_factory
+from boilerplateapp import app_factory
 
 app = app_factory()

@@ -1,5 +1,5 @@
-from application.hasher import get_hash, verify
-from application.storage import UserInput, UserModel
+from boilerplateapp.hasher import get_hash, verify
+from boilerplateapp.storage import UserInput, UserModel
 
 
 def test_has_verify():
