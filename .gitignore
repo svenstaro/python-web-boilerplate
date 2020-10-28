@@ -1,45 +1,44 @@
-*.pyc
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
 
-# Packages
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
 *.egg
-!/tests/**/*.egg
-/*.egg-info
-/dist/*
-build
-_build
-.cache
-*.so
-
-# Installer logs
-pip-log.txt
 
 # Unit test / coverage reports
 .coverage
-.tox
-.pytest_cache
-
-.DS_Store
-.idea/*
-.python-version
-.vscode/*
-
-/test.py
-
-/setup.cfg
-MANIFEST.in
-/setup.py
-.mypy_cache
-
-.venv
-/releases/*
-pip-wheel-metadata
-/poetry.toml
-venv
-.env
-__pycache__
-.cache
 .coverage.*
-.coverage
-.pytest_cache
+.cache
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
 
-.env.*
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+__pypackages__/
+
+# Environments
+.venv
+
+# Pycharm
+.idea/
