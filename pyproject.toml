@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "python-web-boilerplate"
+name = "boilerplateapp"
 version = "0.1.0"
 description = "An opinionated and best-practices boilerplate for a modern FastAPI-based web backend"
 authors = ["Sven-Hendrik Haase <svenstaro@gmail.com>", "Alisa Dammer <alisa.dammer@gmail.com>"]
