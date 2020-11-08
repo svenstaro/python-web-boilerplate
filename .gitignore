@@ -1,7 +1,11 @@
 venv
 .env
+.venv
 __pycache__
 .cache
 .coverage.*
 .coverage
 .pytest_cache
+
+# Pycharm
+.idea/

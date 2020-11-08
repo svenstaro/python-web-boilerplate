@@ -1,5 +1,3 @@
-"""This file's sole purpose is constructing an `app` object from the factory function."""
+from boilerplateapp import app_factory
 
-import os
-from boilerplateapp import create_app
-app = create_app(os.environ['BOILERPLATEAPP_CONFIG'])
+app = app_factory()

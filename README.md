@@ -1,41 +1,51 @@
 # Python Web Boilerplate
 
-[![Build Status](https://travis-ci.org/svenstaro/python-web-boilerplate.svg?branch=master)](https://travis-ci.org/svenstaro/python-web-boilerplate)
-[![codecov](https://codecov.io/gh/svenstaro/python-web-boilerplate/branch/master/graph/badge.svg)](https://codecov.io/gh/svenstaro/python-web-boilerplate)
-[![license](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/svenstaro/python-web-boilerplate/blob/master/LICENSE)
 
 ## About
-This is a boilerplate project made using best practices for getting started quickly
-in a new project. I made this for myself but maybe it will help someone else. Pull
-requests and discussions on best practices welcome!
+This is a boilerplate project made using best practices for getting started quickly.
 
-## Development setup
+Technologies used:
+1. [FastAPI](https://fastapi.tiangolo.com/)
+2. [ORM](https://github.com/encode/orm)
+3. [Pytest](https://docs.pytest.org/en/stable/)
+4. [Prometheus](https://prometheus.io/)
+5. [Passlib](https://passlib.readthedocs.io/en/stable/)
 
-Install all dependencies into a virtualenv which will be managed by `poetry`.
+## Requirements
+1. Docker
+2. Postgres (optional)
 
-    make
 
-Set up your environment by sourcing copying `.env.example` to `.env`
+## Local execution with
+This application requires a postgres running somewhere. 
+1. To start the application with a local postgres run `make run-app`
+2. To start both app and postgres in containers run `make docker-run`
 
-    cp .env.example .env
+Once the app is running
 
-For every new shell you need to source this file and you're good to go.
+1. Swagger can be found on `localhost:5000/docs`
+2. Prometheus metrics on `localhost:5000/metrics`
 
-Make sure you have a working local postgres setup. Your current user should be
-admin in your development postgres installation and it should use the "peer" or
-"trust" auth methods (see `pg_hba.conf`). Given that, create a local
-development database with some test data:
+Default settings:
+1. passlib hash algo: argon2 
 
-    flask initdb
+## Setup
+Application will be searching for a configuration file `.env.<ENV>`
 
-Afterwards, type
+Example of a configuration file is provided under `.env.local`
 
-    flask run
+Following configuration variables are expected:
+```
+app_name - name of the application to stat
+hash_algo - passlib algorithms
+db_host - postgres host, like postgres or localhost
+db_port - 5432 most of the time for postgres
+db_user - service user allowed to acces and write to postgres instance
+db_password - password to access postgres instance
+db_database - specific database to connect to and work with tables
+```
+and run: `make run-app`
 
-to run the development server.
+## Running tests
 
-## Running the tests
-
-Start a local postgresql server and run:
-
-    poetry run pytest
+run `make docker-test`

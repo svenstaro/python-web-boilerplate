@@ -1,0 +1,39 @@
+---
+version: '3'
+
+services:
+        postgres:
+                image: postgres
+                environment:
+                        POSTGRES_DB: boilerplate
+                        POSTGRES_PASSWORD: fastapiisawesome
+                        POSTGRES_USER: boilerplate
+                hostname: postgres
+
+        test:
+                build: .
+                command: "pytest --cov='./boilerplateapp' tests"
+                ports:
+                        - 5000:5000
+                environment:
+                        - LOG_LEVEL=debug
+                        - ENV=test
+                depends_on:
+                        - postgres
+        app:
+                build: .
+                ports:
+                        - 5000:5000
+                environment:
+                        - LOG_LEVEL=debug
+                        - app_name
+                        - secret
+                        - hash_algo
+                        - db_host
+                        - db_port
+                        - db_user
+                        - db_password
+                        - db_database
+                        - ENV=local
+                depends_on:
+                        - postgres

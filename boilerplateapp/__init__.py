@@ -1,36 +1,55 @@
-"""This package contains the whole boilerplateapp with all of its models, views and other modules.
+""" factoty method for FastAPI web service instance  """
+from fastapi import FastAPI, Depends
+from boilerplateapp.config import Configuration
+from starlette_exporter import PrometheusMiddleware, handle_metrics
+from boilerplateapp.storage import db_uri, metadata, database
+import sqlalchemy
 
-This particular file additionally contains the applications factory.
-"""
+# setting configuration as a dependencies for easier reuse of the factory
+def get_config():
+    return Configuration()
 
-from flask import Flask
 
+def app_factory():
+    """ Factory method for creating web service instacne and connecting to all middleware, routes, etc. """
+    app = FastAPI(   
+        title="Python Boilerplate",
+        description="Basic python web service boilerplate with FastAPI",
+        version="0.0.1"
+        )
 
-def create_app(config_name):
-    """Flask app factory function.
+    # db initilalization
+    @app.on_event("startup")
+    async def start_dbs():
+        engine = sqlalchemy.create_engine(db_uri)
+        metadata.create_all(engine)
+        await database.connect()
+   
+    @app.on_event("shutdown")
+    async def shutdown_db_connection():
+        await database.disconnect()
 
-    It takes a `config_name` of the specific configuration to use for this instantiation.
-    """
-    app = Flask(__name__, static_folder=None)
+    # midldeware prometheus
+    app.add_middleware(PrometheusMiddleware)
+    app.add_route("/metrics", handle_metrics)
 
-    from boilerplateapp.config import configs
-    app.config.from_object(configs[config_name])
+    # routes
+    from boilerplateapp.api.health import router
+    app.include_router(
+            router,
+            prefix="",
+            tags=[],
+            dependencies=[Depends(get_config)],
+            responses={}
+            )
 
-    # Initialize extensions
-    from boilerplateapp.extensions import db, passlib
-    db.init_app(app)
-    passlib.init_app(app)
-
-    # Initialize handlers
-    from boilerplateapp.handlers import register_handlers
-    register_handlers(app)
-
-    # Initialize blueprints
-    from boilerplateapp.api import api
-    app.register_blueprint(api)
-
-    # Initialize custom commands
-    from boilerplateapp.cli import register_cli
-    register_cli(app)
+    from boilerplateapp.api.user import router as user_router
+    app.include_router(
+            user_router,
+            prefix="",
+            tags=[],
+            dependencies=[],
+            responses={}
+            )
 
     return app
