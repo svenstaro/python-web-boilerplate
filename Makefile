@@ -12,7 +12,7 @@ lint: init
 .PHONY: run-app
 run-app:
 	docker build -t boilerplate . && \
-		docker run -p 5000:5000 --env-file .env.local --network="host" boilerplate
+		docker rm -f boilerplate && docker run -p 5000:5000 --env-file .env.local --network="host" --name boilerplate boilerplate
 
 
 .PHONY: docker-run

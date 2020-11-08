@@ -7,7 +7,7 @@ from typing import Optional
 
 
 class UserOutput(BaseModel):
-    name: Optional[str] = Field(None, title="Unique name of the user if usr exists")
+    name: Optional[str] = Field(None, title="Unique name of the user if user exists")
     token_status: Optional[bool] = Field(None, title="State of the token: active (True) or expired (False)")
 
 

@@ -43,9 +43,9 @@ def app_factory():
             responses={}
             )
 
-    from boilerplateapp.api.user import router as usr_router
+    from boilerplateapp.api.user import router as user_router
     app.include_router(
-            usr_router,
+            user_router,
             prefix="",
             tags=[],
             dependencies=[],
