@@ -292,7 +292,7 @@ IPython = ">=5.0.0"
 
 [[package]]
 name = "flask-sqlalchemy"
-version = "2.4.1"
+version = "2.5.1"
 description = "Adds SQLAlchemy support to your Flask application."
 category = "main"
 optional = false
@@ -1006,7 +1006,7 @@ testing = ["pathlib2", "contextlib2", "unittest2"]
 [metadata]
 lock-version = "1.1"
 python-versions = "*"
-content-hash = "cadf5d795713de1772b98928a815c4326a7c85b52d0ef35a13df982ebde0fe37"
+content-hash = "14cd919a93d19100b516cfb60c8e0977ba5fa6d865903a5de6cbfb92f2179bd8"
 
 [metadata.files]
 alembic = [
@@ -1190,8 +1190,8 @@ flask-shell-ipython = [
     {file = "flask_shell_ipython-0.4.1-py2.py3-none-any.whl", hash = "sha256:f212b4fad6831edf652799c719cd05fd0716edfaa5506eb41ff9ef09109890d3"},
 ]
 flask-sqlalchemy = [
-    {file = "Flask-SQLAlchemy-2.4.1.tar.gz", hash = "sha256:6974785d913666587949f7c2946f7001e4fa2cb2d19f4e69ead02e4b8f50b33d"},
-    {file = "Flask_SQLAlchemy-2.4.1-py2.py3-none-any.whl", hash = "sha256:0078d8663330dc05a74bc72b3b6ddc441b9a744e2f56fe60af1a5bfc81334327"},
+    {file = "Flask-SQLAlchemy-2.5.1.tar.gz", hash = "sha256:2bda44b43e7cacb15d4e05ff3cc1f8bc97936cc464623424102bfc2c35e95912"},
+    {file = "Flask_SQLAlchemy-2.5.1-py2.py3-none-any.whl", hash = "sha256:f12c3d4cc5cc7fdcc148b9527ea05671718c3ea45d50c7e732cceb33f574b390"},
 ]
 freezegun = [
     {file = "freezegun-0.3.12-py2.py3-none-any.whl", hash = "sha256:edfdf5bc6040969e6ed2e36eafe277963bdc8b7c01daeda96c5c8594576c9390"},
