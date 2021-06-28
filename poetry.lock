@@ -518,7 +518,7 @@ six = "*"
 
 [[package]]
 name = "passlib"
-version = "1.7.2"
+version = "1.7.4"
 description = "comprehensive password hashing framework supporting over 30 schemes"
 category = "main"
 optional = false
@@ -527,7 +527,7 @@ python-versions = "*"
 [package.extras]
 argon2 = ["argon2-cffi (>=18.2.0)"]
 bcrypt = ["bcrypt (>=3.1.0)"]
-build_docs = ["sphinx (>=1.6)", "sphinxcontrib-fulltoc (>=1.2.0)", "cloud-sptheme (>=1.10.0)"]
+build_docs = ["sphinx (>=1.6)", "sphinxcontrib-fulltoc (>=1.2.0)", "cloud-sptheme (>=1.10.1)"]
 totp = ["cryptography"]
 
 [[package]]
@@ -1006,7 +1006,7 @@ testing = ["pathlib2", "contextlib2", "unittest2"]
 [metadata]
 lock-version = "1.1"
 python-versions = "*"
-content-hash = "cadf5d795713de1772b98928a815c4326a7c85b52d0ef35a13df982ebde0fe37"
+content-hash = "f078d9ccac5c82a0676ac6eb997ec97f2abf6bd6fe05cb07c9c510347e9ff72e"
 
 [metadata.files]
 alembic = [
@@ -1312,8 +1312,8 @@ packaging = [
     {file = "packaging-19.1.tar.gz", hash = "sha256:c491ca87294da7cc01902edbe30a5bc6c4c28172b5138ab4e4aa1b9d7bfaeafe"},
 ]
 passlib = [
-    {file = "passlib-1.7.2-py2.py3-none-any.whl", hash = "sha256:68c35c98a7968850e17f1b6892720764cc7eed0ef2b7cb3116a89a28e43fe177"},
-    {file = "passlib-1.7.2.tar.gz", hash = "sha256:8d666cef936198bc2ab47ee9b0410c94adf2ba798e5a84bf220be079ae7ab6a8"},
+    {file = "passlib-1.7.4-py2.py3-none-any.whl", hash = "sha256:aa6bca462b8d8bda89c70b382f0c298a20b5560af6cbfa2dce410c0a2fb669f1"},
+    {file = "passlib-1.7.4.tar.gz", hash = "sha256:defd50f72b65c5402ab2c573830a6978e5f202ad0d984793c8dde2c4152ebe04"},
 ]
 pathlib2 = [
     {file = "pathlib2-2.3.4-py2.py3-none-any.whl", hash = "sha256:2156525d6576d21c4dcaddfa427fae887ef89a7a9de5cbfe0728b3aafa78427e"},
